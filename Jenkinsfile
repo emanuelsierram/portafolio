@@ -12,7 +12,7 @@ pipeline {
 
   //Una sección que define las herramientas “preinstaladas” en Jenkins
   tools {
-    jdk 'JDK11_Centos' //Verisión preinstalada en la Configuración del Master
+    jdk 'JDK8_Centos' //Verisión preinstalada en la Configuración del Master
   }
 /*	Versiones disponibles
       JDK8_Mac
@@ -39,7 +39,7 @@ pipeline {
         submoduleCfg: [], 
         userRemoteConfigs: [[
        credentialsId: 'GitHub_emanuelsierram', 
-     url:'https://github.com/emanuelsierram/pruebaGradle'
+     url:'https://github.com/emanuelsierram/portafolio'
 ]]
 ])
 
