@@ -12,25 +12,17 @@ import com.ceiba.BasePrueba;
 
 public class ServicioCrearUsuarioTest {
 
-<<<<<<< HEAD
-  /*  @Test
+/*
+    @Test
     public void validarClaveLongitudMenor4Test() {
         // arrange
         UsuarioTestDataBuilder usuarioTestDataBuilder = new UsuarioTestDataBuilder().conTelefono("124");
         // act - assert
         BasePrueba.assertThrows(() -> usuarioTestDataBuilder.build(), ExcepcionLongitudValor.class, "La clave debe tener una longitud mayor o igual a 4");
     }
-*/
-=======
-    @Test
-    public void validarClaveLongitudMenor4Test() {
-        // arrange
-        UsuarioTestDataBuilder usuarioTestDataBuilder = new UsuarioTestDataBuilder().conClave("124");
-        // act - assert
-        BasePrueba.assertThrows(() -> usuarioTestDataBuilder.build(), ExcepcionLongitudValor.class, "La clave debe tener una longitud mayor o igual a 4");
-    }
 
->>>>>>> b99d914c1ae58f56e41684276d6bdcfa6f832c1a
+*/
+
     @Test
     public void validarUsuarioExistenciaPreviaTest() {
         // arrange
