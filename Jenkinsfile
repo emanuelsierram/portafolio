@@ -46,11 +46,20 @@ pipeline {
       }
     }
     
+    
+    stage('Clean') {
+      steps{
+        echo "------------>Clean<------------"
+        sh './gradlew --b ./microservicio/build.gradle clean'
+      }
+    }
+    
     stage('Compile & Unit Tests') {  
         steps{
         echo "------------>compile & Unit Tests<------------"
         sh 'chmod +x gradlew'
         sh './gradlew --b ./microservicio/build.gradle test'
+
       }
     }
 
@@ -77,8 +86,7 @@ sh "${tool name: 'SonarScanner', type:'hudson.plugins.sonar.SonarRunnerInstallat
     }
     success {
       echo 'This will run only if successful'
-     
-      junit './build/test-results/test/*.xml' 
+      junit 'build/test-results/test/*.xml' 
     }
     failure {
       failure {
