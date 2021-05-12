@@ -30,7 +30,7 @@ public class ServicioCrearCita{
         validarFecha(cita.getFechaInicio());
         validarDuracion(cita.getFechaInicio(), cita.getFechaFinal());
         validarIntervalo(cita.getFechaInicio(), cita.getFechaFinal());
-        if(metodo=="credito")
+        if(metodo.equals("credito"))
             cita.setValorAcordado(cita.getValorAcordado()-(cita.getValorAcordado()*0.07));
         return this.repositorioCita.crear(cita);
     }
@@ -39,7 +39,7 @@ public class ServicioCrearCita{
       LocalDateTime fechaExistente = repositorioCita.consultar(fecha);
         if(fechaExistente.isEqual(fecha) || fechaExistente.isBefore(fecha))
             throw new ExcepcionDuplicidad(YA_EXISTE_CITA_EN_EL_HORARIO);
-        if(fechaExistente.getDayOfWeek().equals("SATURDAY"))
+        if(fechaExistente.getDayOfWeek().name().equals("SATURDAY"))
             throw new ExcepcionDuplicidad(NO_SE_PUEDE_AGENDAR_EN_DIA_SABADO);
     }
 
