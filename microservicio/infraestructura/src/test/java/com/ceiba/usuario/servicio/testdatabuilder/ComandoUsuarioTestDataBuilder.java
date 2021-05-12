@@ -26,6 +26,6 @@ public class ComandoUsuarioTestDataBuilder {
     }
 
     public ComandoUsuario build() {
-        return new ComandoUsuario(id,nombre, telefono);
+        return new ComandoUsuario(id,nombre,telefono);
     }
 }

@@ -1,4 +1,4 @@
 update usuario
 set nombre = :nombre,
-	telefono = :telefono,
+	telefono = :telefono
 where id = :id
