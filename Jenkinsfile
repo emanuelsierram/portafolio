@@ -88,11 +88,10 @@ sh "${tool name: 'SonarScanner', type:'hudson.plugins.sonar.SonarRunnerInstallat
       echo 'This will run only if successful'
       junit 'build/test-results/test/*.xml' 
     }
-    failure {
+  
       failure {
       echo 'This will run only if failed'
       mail (to: 'emanuel.sierra@ceiba.com.co',subject: "Failed Pipeline:${currentBuild.fullDisplayName}",body: "Something is wrong with ${env.BUILD_URL}")
-}
 
     }
     unstable {
