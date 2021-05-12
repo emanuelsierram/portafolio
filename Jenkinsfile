@@ -46,11 +46,20 @@ pipeline {
       }
     }
     
+    
+    stage('Clean') {
+      steps{
+        echo "------------>Clean<------------"
+         sh 'chmod +x gradlew'
+        sh './gradlew --b ./microservicio/build.gradle clean'
+      }
+    }
+    
     stage('Compile & Unit Tests') {  
         steps{
         echo "------------>compile & Unit Tests<------------"
-        sh 'chmod +x gradlew'
         sh './gradlew --b ./microservicio/build.gradle test'
+
       }
     }
 
@@ -77,14 +86,12 @@ sh "${tool name: 'SonarScanner', type:'hudson.plugins.sonar.SonarRunnerInstallat
     }
     success {
       echo 'This will run only if successful'
-     
-     // junit 'build/test-results/test/*.xml' 
+      junit '**/build/test-results/test/*.xml' 
     }
-    failure {
+  
       failure {
       echo 'This will run only if failed'
       mail (to: 'emanuel.sierra@ceiba.com.co',subject: "Failed Pipeline:${currentBuild.fullDisplayName}",body: "Something is wrong with ${env.BUILD_URL}")
-}
 
     }
     unstable {
