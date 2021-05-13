@@ -6,7 +6,6 @@ import java.time.LocalDateTime;
 
 import com.ceiba.infraestructura.jdbc.MapperResult;
 import com.ceiba.usuario.modelo.dto.DtoUsuario;
-import com.ceiba.usuario.modelo.entidad.Cita;
 import org.springframework.jdbc.core.RowMapper;
 
 public class MapeoUsuario implements RowMapper<DtoUsuario>, MapperResult {
@@ -17,11 +16,12 @@ public class MapeoUsuario implements RowMapper<DtoUsuario>, MapperResult {
         Long id = resultSet.getLong("id");
         String nombre = resultSet.getString("nombre");
         String telefono = resultSet.getString("telefono");
+        String metodopago = resultSet.getString("metodopago");
 
 
       //  LocalDateTime fecha = extraerLocalDateTime(resultSet, "fecha_creacion");
 
-        return new DtoUsuario(id,nombre,telefono);
+        return new DtoUsuario(id,nombre,telefono, metodopago);
     }
 
 }

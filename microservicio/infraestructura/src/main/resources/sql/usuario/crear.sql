@@ -1,1 +1,1 @@
-insert into usuario (nombre, telefono) values (:nombre, :telefono)
+insert into usuario (nombre, telefono, metodopago) values (:nombre, :telefono, :metodopago)

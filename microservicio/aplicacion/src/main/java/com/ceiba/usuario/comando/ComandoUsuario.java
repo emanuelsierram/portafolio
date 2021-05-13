@@ -17,6 +17,7 @@ public class ComandoUsuario{
     private Long id;
     private String nombre;
     private String telefono;
+    private String metodoPago;
 
 
 }

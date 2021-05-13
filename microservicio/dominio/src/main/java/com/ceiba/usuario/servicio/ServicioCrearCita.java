@@ -6,7 +6,6 @@ import com.ceiba.usuario.puerto.repositorio.RepositorioCita;
 import static java.time.temporal.ChronoUnit.MINUTES;
 
 
-import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.chrono.ChronoLocalDateTime;
@@ -26,12 +25,12 @@ public class ServicioCrearCita{
         this.repositorioCita=repositorioCita;
     }
 
-    public Long ejecutar(Cita cita, String metodo){
+    public Long ejecutar(Cita cita){
         validarFecha(cita.getFechaInicio());
         validarDuracion(cita.getFechaInicio(), cita.getFechaFinal());
         validarIntervalo(cita.getFechaInicio(), cita.getFechaFinal());
-        if(metodo.equals("credito"))
-            cita.setValorAcordado(cita.getValorAcordado()-(cita.getValorAcordado()*0.07));
+       if(cita.getUsuario().getMetodoPago().equals("credito"))
+           cita.setValorAcordado(cita.getValorAcordado()-(cita.getValorAcordado()*0.07));
         return this.repositorioCita.crear(cita);
     }
 

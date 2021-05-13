@@ -12,7 +12,8 @@ public class FabricaUsuario {
         return new Usuario(
                 comandoUsuario.getId(),
                 comandoUsuario.getNombre(),
-                comandoUsuario.getTelefono()
+                comandoUsuario.getTelefono(),
+                comandoUsuario.getMetodoPago()
         );
     }
 

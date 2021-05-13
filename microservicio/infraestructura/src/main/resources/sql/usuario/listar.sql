@@ -1,2 +1,2 @@
-select id,nombre,telefono
+select id,nombre,telefono, metodopago
 from usuario
