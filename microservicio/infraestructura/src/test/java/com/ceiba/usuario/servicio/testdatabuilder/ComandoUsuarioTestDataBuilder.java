@@ -12,6 +12,7 @@ public class ComandoUsuarioTestDataBuilder {
     private Long id;
     private String nombre;
     private String telefono;
+    private String metodopago;
 
 
     public ComandoUsuarioTestDataBuilder() {
@@ -26,6 +27,6 @@ public class ComandoUsuarioTestDataBuilder {
     }
 
     public ComandoUsuario build() {
-        return new ComandoUsuario(id,nombre,telefono);
+        return new ComandoUsuario(id,nombre,telefono, metodopago);
     }
 }
