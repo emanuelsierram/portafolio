@@ -1,4 +1,4 @@
-/*package com.ceiba.usuario.comando.manejador;
+package com.ceiba.usuario.comando.manejador;
 
 import com.ceiba.ComandoRespuesta;
 import com.ceiba.manejador.ManejadorComandoRespuesta;
@@ -30,4 +30,3 @@ public class ManejadorCrearCita implements ManejadorComandoRespuesta<ComandoCita
 
 
 }
-*/
