@@ -9,10 +9,12 @@ public class UsuarioTestDataBuilder {
     private Long id;
     private String nombreUsuario;
     private String telefono;
+    private String metodopago;
 
     public UsuarioTestDataBuilder() {
-        nombreUsuario = "Hola";
+        nombreUsuario = "Andres";
         telefono = "1234";
+        metodopago = "credito";
 
     }
     public UsuarioTestDataBuilder conId(Long id) {
@@ -21,6 +23,6 @@ public class UsuarioTestDataBuilder {
     }
 
     public Usuario build() {
-        return new Usuario(id,nombreUsuario, telefono);
+        return new Usuario(id,nombreUsuario, telefono, metodopago);
     }
 }
