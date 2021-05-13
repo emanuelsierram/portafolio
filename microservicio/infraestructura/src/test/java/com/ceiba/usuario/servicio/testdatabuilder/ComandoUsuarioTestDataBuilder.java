@@ -18,6 +18,7 @@ public class ComandoUsuarioTestDataBuilder {
     public ComandoUsuarioTestDataBuilder() {
         nombre = UUID.randomUUID().toString();
         telefono = "1234";
+        metodopago = "credito";
        // fecha = LocalDateTime.now();
     }
 
