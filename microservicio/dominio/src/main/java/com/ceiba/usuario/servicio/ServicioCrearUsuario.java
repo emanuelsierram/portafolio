@@ -16,7 +16,7 @@ public class ServicioCrearUsuario {
     }
 
     public Long ejecutar(Usuario usuario) {
-        validarExistenciaPrevia(usuario);
+      validarExistenciaPrevia(usuario);
         return this.repositorioUsuario.crear(usuario);
     }
 

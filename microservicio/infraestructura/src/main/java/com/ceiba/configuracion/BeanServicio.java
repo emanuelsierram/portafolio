@@ -18,11 +18,6 @@ public class BeanServicio {
         return new ServicioCrearUsuario(repositorioUsuario);
     }
 
-    @Bean
-    public ServicioCrearCita servicioCrearCita(RepositorioCita repositorioCita){
-        return new ServicioCrearCita(repositorioCita);
-    }
-
 
     @Bean
     public ServicioEliminarUsuario servicioEliminarUsuario(RepositorioUsuario repositorioUsuario) {
@@ -33,6 +28,12 @@ public class BeanServicio {
     public ServicioActualizarUsuario servicioActualizarUsuario(RepositorioUsuario repositorioUsuario) {
         return new ServicioActualizarUsuario(repositorioUsuario);
     }
+
+    @Bean
+    public ServicioCrearCita servicioCrearCita(RepositorioCita repositorioCita) {
+        return new ServicioCrearCita(repositorioCita);
+    }
+
 
 
 

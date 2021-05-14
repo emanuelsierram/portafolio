@@ -12,7 +12,7 @@ public class UsuarioTestDataBuilder {
     private String metodopago;
 
     public UsuarioTestDataBuilder() {
-        nombreUsuario = "Andres";
+        nombreUsuario = "mamaajwdnw";
         telefono = "1234";
         metodopago = "credito";
 

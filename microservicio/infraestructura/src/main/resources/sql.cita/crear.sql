@@ -1,1 +1,0 @@
-insert into cita (descripcion, fecha_inicio, fecha_final, valor, usuario) values (:descripcion, :fecha_inicio, :fecha_final, valor, usuario)

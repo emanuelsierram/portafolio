@@ -12,31 +12,16 @@ public interface RepositorioCita{
      */
     Long crear(Cita cita);
 
-    /**
-     * Permite actualizar un usuario
-     * @param cita
-     */
-    void actualizar(Cita cita);
+
 
     /**
-     * Permite eliminar un usuario
-     * @param id
-     */
-    void eliminar(Long id);
-
-    /**
-     * Permite validar si existe un usuario con un nombre
-     * @param fechaInicio
+     * Permite validar si existe una cita con un descripcion
+     * @param descripcion
      * @return si existe o no
      */
-    LocalDateTime consultar(LocalDateTime fechaInicio);
+    boolean existe(String descripcion);
 
-    /**
-     * Permite validar si existe un usuario con un nombre excluyendo un id
-     * @param nombre
-     * @return si existe o no
-     */
-    boolean existeExcluyendoId(Long id,String nombre);
+
 
 
 

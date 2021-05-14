@@ -15,7 +15,7 @@ public class FabricaCita {
                 comandoCita.getFechaInicio(),
                 comandoCita.getFechaFinal(),
                 comandoCita.getValorAcordado(),
-                comandoCita.getUsuario()
+                comandoCita.getMetodopago()
         );
     }
 }

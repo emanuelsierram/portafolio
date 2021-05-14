@@ -1,3 +1,5 @@
+
+
 package com.ceiba.usuario.comando.manejador;
 
 import com.ceiba.ComandoRespuesta;
@@ -23,6 +25,5 @@ public class ManejadorCrearCita implements ManejadorComandoRespuesta<ComandoCita
         Cita cita = this.fabricaCita.crear(comandoCita);
         return new ComandoRespuesta<>(this.servicioCrearCita.ejecutar(cita));
     }
-
 
 }

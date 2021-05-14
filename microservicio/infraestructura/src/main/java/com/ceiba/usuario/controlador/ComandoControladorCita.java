@@ -7,7 +7,7 @@ import com.ceiba.usuario.comando.ComandoCita;
 import com.ceiba.usuario.comando.ComandoUsuario;
 import com.ceiba.usuario.comando.manejador.ManejadorActualizarUsuario;
 import com.ceiba.usuario.comando.manejador.ManejadorCrearCita;
-import com.ceiba.usuario.comando.manejador.ManejadorCrearUsuario;
+//import com.ceiba.usuario.comando.manejador.ManejadorCrearUsuario;
 import com.ceiba.usuario.comando.manejador.ManejadorEliminarUsuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,8 +16,8 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 @RestController
-@RequestMapping("/usuarios")
-@Api(tags = { "Controlador comando usuario"})
+@RequestMapping("/citas")
+@Api(tags = { "Controlador comando citas"})
 public class ComandoControladorCita {
 
     private final ManejadorCrearCita manejadorCrearCita;
@@ -35,14 +35,13 @@ public class ComandoControladorCita {
 
     @PostMapping
     @ApiOperation("Crear Cita")
-    public ComandoRespuesta<Long> crear(@RequestBody ComandoCita comandoCita, @PathVariable String metodo) {
-       comandoCita.getUsuario().setMetodoPago(metodo);
+    public ComandoRespuesta<Long> crear(@RequestBody ComandoCita comandoCita) {
         return manejadorCrearCita.ejecutar(comandoCita);
     }
 
-
+/*
     @DeleteMapping(value="/{id}")
-    @ApiOperation("Eliminar Usuario")
+    @ApiOperation("Eliminar cita")
     public void eliminar(@PathVariable Long id) {
         manejadorEliminarUsuario.ejecutar(id);
     }
@@ -54,7 +53,10 @@ public class ComandoControladorCita {
         manejadorActualizarUsuario.ejecutar(comandoUsuario);
     }
 
-
+*/
 }
+
+
+
 
 

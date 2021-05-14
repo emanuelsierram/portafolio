@@ -65,4 +65,5 @@ public class RepositorioUsuarioMysql implements RepositorioUsuario {
 
         return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlExisteExcluyendoId,paramSource, Boolean.class);
     }
+
 }

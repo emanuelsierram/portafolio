@@ -1,7 +1,9 @@
 package com.ceiba.usuario.servicio;
 
 import com.ceiba.dominio.excepcion.ExcepcionDuplicidad;
+import com.ceiba.dominio.excepcion.ExcepcionValorInvalido;
 import com.ceiba.usuario.modelo.entidad.Cita;
+import com.ceiba.usuario.modelo.entidad.Usuario;
 import com.ceiba.usuario.puerto.repositorio.RepositorioCita;
 import static java.time.temporal.ChronoUnit.MINUTES;
 
@@ -25,16 +27,31 @@ public class ServicioCrearCita{
         this.repositorioCita=repositorioCita;
     }
 
-    public Long ejecutar(Cita cita){
-        validarFecha(cita.getFechaInicio());
-        validarDuracion(cita.getFechaInicio(), cita.getFechaFinal());
-        validarIntervalo(cita.getFechaInicio(), cita.getFechaFinal());
-       if(cita.getUsuario().getMetodoPago().equals("credito"))
-           cita.setValorAcordado(cita.getValorAcordado()-(cita.getValorAcordado()*0.07));
+    public Long ejecutar(Cita cita) {
+
+       // validarExistenciaPrevia(cita);
         return this.repositorioCita.crear(cita);
+
     }
 
-    public void validarFecha(LocalDateTime fecha){
+          /*  validarFecha(cita.getFechaInicio());
+        validarDuracion(cita.getFechaInicio(), cita.getFechaFinal());
+        validarIntervalo(cita.getFechaInicio(), cita.getFechaFinal());
+       if(cita.getMetodopago().equals("credito"))
+           cita.setValorAcordado(cita.getValorAcordado()-(cita.getValorAcordado()*0.07));*/
+
+
+
+
+
+    private void validarExistenciaPrevia(Cita cita) {
+        boolean existe = this.repositorioCita.existe(cita.getDescripcion());
+        if(existe) {
+            throw new ExcepcionDuplicidad(YA_EXISTE_CITA_EN_EL_HORARIO);
+        }
+    }
+
+  /*  public void validarFecha(LocalDateTime fecha){
       LocalDateTime fechaExistente = repositorioCita.consultar(fecha);
         if(fechaExistente.isEqual(fecha) || fechaExistente.isBefore(fecha))
             throw new ExcepcionDuplicidad(YA_EXISTE_CITA_EN_EL_HORARIO);
@@ -45,7 +62,7 @@ public class ServicioCrearCita{
     public void validarDuracion(LocalDateTime fechaInicio, LocalDateTime fechaFinal) {
         int minutos= (int) MINUTES.between(fechaInicio, fechaFinal);
         if(minutos<60)
-            throw new ExcepcionDuplicidad(CITA_MINIMA_DE_UNA_HORA);
+            throw new ExcepcionValorInvalido(CITA_MINIMA_DE_UNA_HORA);
 
     }
 
@@ -59,6 +76,7 @@ public class ServicioCrearCita{
 
     }
 
+*/
 
 
 

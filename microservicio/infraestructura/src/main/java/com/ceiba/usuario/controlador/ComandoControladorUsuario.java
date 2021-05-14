@@ -1,3 +1,4 @@
+
 package com.ceiba.usuario.controlador;
 
 import com.ceiba.ComandoRespuesta;
@@ -48,3 +49,4 @@ public class ComandoControladorUsuario {
 		manejadorActualizarUsuario.ejecutar(comandoUsuario);
 	}
 }
+
