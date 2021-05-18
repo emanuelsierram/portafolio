@@ -32,6 +32,13 @@ public class CitaTestDataBuilder {
         return this;
     }
 
+    public CitaTestDataBuilder conDescripcion(String descripcion){
+        this.descripcion = descripcion;
+        return this;
+
+
+    }
+
     public Cita build() {
         return new Cita(id, descripcion, fechaInicio, fechaFinal, valorAcordado, metodopago);
     }

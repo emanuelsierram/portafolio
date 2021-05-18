@@ -16,12 +16,14 @@ public class ServicioCrearUsuario {
     }
 
     public Long ejecutar(Usuario usuario) {
-      validarExistenciaPrevia(usuario);
+
+        validarExistenciaPrevia(usuario);
         return this.repositorioUsuario.crear(usuario);
     }
 
     private void validarExistenciaPrevia(Usuario usuario) {
         boolean existe = this.repositorioUsuario.existe(usuario.getNombre());
+
         if(existe) {
             throw new ExcepcionDuplicidad(EL_USUARIO_YA_EXISTE_EN_EL_SISTEMA);
         }

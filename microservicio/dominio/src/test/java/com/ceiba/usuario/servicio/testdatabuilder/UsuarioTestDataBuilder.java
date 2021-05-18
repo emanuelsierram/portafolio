@@ -21,6 +21,12 @@ public class UsuarioTestDataBuilder {
         this.id = id;
         return this;
     }
+    public UsuarioTestDataBuilder conNombre(String nombre){
+        this.nombreUsuario=nombre;
+        return this;
+    }
+
+
 
     public Usuario build() {
         return new Usuario(id,nombreUsuario, telefono, metodopago);

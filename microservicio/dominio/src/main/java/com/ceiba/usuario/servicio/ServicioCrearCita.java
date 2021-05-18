@@ -28,28 +28,25 @@ public class ServicioCrearCita{
     }
 
     public Long ejecutar(Cita cita) {
-
-       // validarExistenciaPrevia(cita);
+        validarExistenciaPrevia(cita);
         return this.repositorioCita.crear(cita);
-
     }
 
-          /*  validarFecha(cita.getFechaInicio());
+
+    public void validarExistenciaPrevia(Cita cita) {
+        boolean existe = this.repositorioCita.existe(cita.getDescripcion());
+        if(existe) {
+            throw new ExcepcionDuplicidad(YA_EXISTE_CITA_EN_EL_HORARIO);
+        }
+    }
+
+      /*  validarFecha(cita.getFechaInicio());
         validarDuracion(cita.getFechaInicio(), cita.getFechaFinal());
         validarIntervalo(cita.getFechaInicio(), cita.getFechaFinal());
        if(cita.getMetodopago().equals("credito"))
            cita.setValorAcordado(cita.getValorAcordado()-(cita.getValorAcordado()*0.07));*/
 
 
-
-
-
-    private void validarExistenciaPrevia(Cita cita) {
-        boolean existe = this.repositorioCita.existe(cita.getDescripcion());
-        if(existe) {
-            throw new ExcepcionDuplicidad(YA_EXISTE_CITA_EN_EL_HORARIO);
-        }
-    }
 
   /*  public void validarFecha(LocalDateTime fecha){
       LocalDateTime fechaExistente = repositorioCita.consultar(fecha);
