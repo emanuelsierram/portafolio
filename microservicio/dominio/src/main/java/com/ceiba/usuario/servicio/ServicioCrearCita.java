@@ -5,9 +5,12 @@ import com.ceiba.dominio.excepcion.ExcepcionValorInvalido;
 import com.ceiba.usuario.modelo.entidad.Cita;
 import com.ceiba.usuario.modelo.entidad.Usuario;
 import com.ceiba.usuario.puerto.repositorio.RepositorioCita;
+import jdk.vm.ci.meta.Local;
+
 import static java.time.temporal.ChronoUnit.MINUTES;
 
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.chrono.ChronoLocalDateTime;
@@ -28,52 +31,65 @@ public class ServicioCrearCita{
     }
 
     public Long ejecutar(Cita cita) {
+
         validarExistenciaPrevia(cita);
+        ValidarNoAgendarDiaSabado(cita.getFechaInicio());
+        validarDuracionMinima(cita.getFechaInicio(), cita.getFechaFinal());
+        validarIntervalo(cita.getFechaInicio(), cita.getFechaFinal());
+        cita.setValorAcordado(valorAcordadoPorMetodoDePago(cita));
         return this.repositorioCita.crear(cita);
     }
 
-
     public void validarExistenciaPrevia(Cita cita) {
-        boolean existe = this.repositorioCita.existe(cita.getDescripcion());
+        boolean existe = this.repositorioCita.existe(cita.getFechaInicio());
+
         if(existe) {
             throw new ExcepcionDuplicidad(YA_EXISTE_CITA_EN_EL_HORARIO);
         }
     }
 
-      /*  validarFecha(cita.getFechaInicio());
-        validarDuracion(cita.getFechaInicio(), cita.getFechaFinal());
-        validarIntervalo(cita.getFechaInicio(), cita.getFechaFinal());
-       if(cita.getMetodopago().equals("credito"))
-           cita.setValorAcordado(cita.getValorAcordado()-(cita.getValorAcordado()*0.07));*/
+    public  void ValidarNoAgendarDiaSabado(LocalDateTime fecha){
+        if(fecha.getDayOfWeek().name().equals("SATURDAY")) {
+            throw new ExcepcionValorInvalido(NO_SE_PUEDE_AGENDAR_EN_DIA_SABADO);
+        }
 
-
-
-  /*  public void validarFecha(LocalDateTime fecha){
-      LocalDateTime fechaExistente = repositorioCita.consultar(fecha);
-        if(fechaExistente.isEqual(fecha) || fechaExistente.isBefore(fecha))
-            throw new ExcepcionDuplicidad(YA_EXISTE_CITA_EN_EL_HORARIO);
-        if(fechaExistente.getDayOfWeek().name().equals("SATURDAY"))
-            throw new ExcepcionDuplicidad(NO_SE_PUEDE_AGENDAR_EN_DIA_SABADO);
     }
 
-    public void validarDuracion(LocalDateTime fechaInicio, LocalDateTime fechaFinal) {
+    public double valorAcordadoPorMetodoDePago(Cita cita){
+        if(cita.getUsuario().getMetodoDePago().equalsIgnoreCase("credito")){
+            return cita.getValorAcordado()-(cita.getValorAcordado()*0.07);
+        }
+        return cita.getValorAcordado();
+    }
+
+    public void validarDuracionMinima(LocalDateTime fechaInicio, LocalDateTime fechaFinal) {
         int minutos= (int) MINUTES.between(fechaInicio, fechaFinal);
-        if(minutos<60)
+        if(minutos<60) {
             throw new ExcepcionValorInvalido(CITA_MINIMA_DE_UNA_HORA);
+        }
+
 
     }
 
-    public void validarIntervalo(LocalDateTime fechaInicio, LocalDateTime fechaFinal){
-       LocalTime tiempoInicio= LocalTime.of(06,00,00);
-       LocalTime tiempoFinal = LocalTime.of(22,00,00);
-       if(fechaInicio.isBefore(ChronoLocalDateTime.from(tiempoInicio)))
-           throw new ExcepcionDuplicidad(NO_ESTA_EN_EL_INTERVALO_DE_TIEMPO);
-       if(fechaFinal.isAfter(ChronoLocalDateTime.from(tiempoFinal)))
-           throw new ExcepcionDuplicidad(NO_ESTA_EN_EL_INTERVALO_DE_TIEMPO);
+    public void validarIntervalo(LocalDateTime fechaInicioIngresada, LocalDateTime fechaFinalIngresada){
+        LocalTime tiempoInicioNuevo= LocalTime.of(06,00,00);
+        LocalTime tiempoFinalNuevo = LocalTime.of(22,00,00);
+        LocalDate fechaInicioNueva = fechaInicioIngresada.toLocalDate();
+        LocalDate fechaFinalNueva = fechaFinalIngresada.toLocalDate();
+
+        LocalDateTime fechaInicio = LocalDateTime.of(fechaInicioNueva, tiempoInicioNuevo);
+        LocalDateTime fechaFinal = LocalDateTime.of(fechaFinalNueva, tiempoFinalNuevo);
+
+        if(fechaInicioIngresada.isBefore(fechaInicio)) {
+            throw new ExcepcionValorInvalido(NO_ESTA_EN_EL_INTERVALO_DE_TIEMPO);
+        }
+        if(fechaFinalIngresada.isAfter(fechaFinal)) {
+            throw new ExcepcionValorInvalido(NO_ESTA_EN_EL_INTERVALO_DE_TIEMPO);
+        }
 
     }
 
-*/
+
 
 
 

@@ -21,6 +21,9 @@ public class RepositorioCitaMysql implements RepositorioCita {
     @SqlStatement(namespace="cita", value="existe")
     private static String sqlExiste;
 
+    @SqlStatement(namespace="cita", value="actualizar")
+    private static String sqlActualizar;
+
     public RepositorioCitaMysql(CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate) {
         this.customNamedParameterJdbcTemplate = customNamedParameterJdbcTemplate;
     }
@@ -28,12 +31,12 @@ public class RepositorioCitaMysql implements RepositorioCita {
     public Long crear(Cita cita) {
         return this.customNamedParameterJdbcTemplate.crear(cita, sqlCrear);
     }
-/*
+
     @Override
     public void actualizar(Cita cita) {
-
+        this.customNamedParameterJdbcTemplate.actualizar(cita, sqlActualizar);
     }
-
+/*
     @Override
     public void eliminar(Long id) {
 
@@ -47,9 +50,9 @@ public class RepositorioCitaMysql implements RepositorioCita {
     }
 */
     @Override
-    public boolean existe(String descripcion) {
+    public boolean existe(LocalDateTime fecha) {
         MapSqlParameterSource paramSource = new MapSqlParameterSource();
-        paramSource.addValue("descripcion", descripcion);
+        paramSource.addValue("fecha_inicio", fecha);
 
         return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlExiste,paramSource, Boolean.class);
     }

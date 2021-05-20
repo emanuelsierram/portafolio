@@ -21,16 +21,16 @@ public class Usuario {
     private Long id;
     private String nombre;
     private String telefono;
-    private String metodopago;
+    private String metodoDePago;
 
-    public Usuario(Long id, String nombre, String telefono, String metodopago) {
+    public Usuario(Long id, String nombre, String telefono, String metodoDePago) {
         validarObligatorio(nombre, SE_DEBE_INGRESAR_EL_NOMBRE_DE_USUARIO);
         validarObligatorio(telefono, SE_DEBE_INGRESAR_EL_TELEFONO);
-        validarObligatorio(telefono, SE_DEBE_INGRESAR_EL_METODO_DE_PAGO);
+        validarObligatorio(metodoDePago, SE_DEBE_INGRESAR_EL_METODO_DE_PAGO);
         this.id = id;
         this.nombre = nombre;
         this.telefono = telefono;
-        this.metodopago = metodopago;
+        this.metodoDePago = metodoDePago;
 
     }
 

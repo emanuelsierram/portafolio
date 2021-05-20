@@ -94,4 +94,11 @@ public class ValidadorArgumento {
             throw new ExcepcionValorInvalido(mensaje);
         }
     }
+
+    public static void validarDuracionMinima(){
+
+
+    }
+
+
 }

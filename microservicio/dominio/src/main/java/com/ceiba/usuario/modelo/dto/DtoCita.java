@@ -15,8 +15,7 @@ public class DtoCita {
     private LocalDateTime fechaInicio;
     private LocalDateTime fechaFinal;
     private Double valorAcordado;
-    private String metodopago;
-
+    private Usuario usuario;
 
 
 

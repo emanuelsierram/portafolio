@@ -16,13 +16,21 @@ public interface RepositorioCita{
 
     /**
      * Permite validar si existe una cita con un descripcion
-     * @param descripcion
+     * @param fechaInicio
      * @return si existe o no
      */
-    boolean existe(String descripcion);
+    boolean existe(LocalDateTime fechaInicio);
+
+    /**
+     * Permite actualizar un usuario
+     * @param cita
+     */
+    void actualizar(Cita cita);
 
 
-
-
-
+    /**
+     * Permite actualizar un usuario
+     * @param id
+     */
+    Cita obtener(Long id);
 }

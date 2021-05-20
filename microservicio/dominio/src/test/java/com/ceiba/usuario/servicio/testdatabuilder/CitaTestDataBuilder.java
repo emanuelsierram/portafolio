@@ -12,14 +12,14 @@ public class CitaTestDataBuilder {
     private LocalDateTime fechaInicio;
     private LocalDateTime fechaFinal;
     private Double valorAcordado;
-    private String metodopago;
+    private Usuario usuario;
 
     public CitaTestDataBuilder() {
-        descripcion="Hola";
-        fechaInicio=LocalDateTime.of(2021,4,21,16,06);
-        fechaFinal=LocalDateTime.of(2021,4,21,17,06);
-        valorAcordado=666.0;
-        metodopago="credito";
+        descripcion="Esta es una descripcion";
+        fechaInicio=LocalDateTime.of(2021,4,20,10,20);
+        fechaFinal=LocalDateTime.of(2021,4,20,12,20);
+        valorAcordado=200.0;
+        usuario = new Usuario(1L,"Emanuel", "31267050", "Credito");
     }
 
     public CitaTestDataBuilder conId(Long id) {
@@ -38,9 +38,15 @@ public class CitaTestDataBuilder {
 
 
     }
+    public CitaTestDataBuilder conFechas(LocalDateTime fechaInicio, LocalDateTime fechaFinal){
+
+        this.fechaInicio = fechaInicio;
+        this.fechaFinal = fechaFinal;
+        return  this;
+    }
 
     public Cita build() {
-        return new Cita(id, descripcion, fechaInicio, fechaFinal, valorAcordado, metodopago);
+        return new Cita(id, descripcion, fechaInicio, fechaFinal, valorAcordado, usuario);
     }
 
     }

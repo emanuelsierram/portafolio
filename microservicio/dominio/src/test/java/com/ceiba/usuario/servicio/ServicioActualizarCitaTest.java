@@ -1,7 +1,8 @@
-/*package com.ceiba.usuario.servicio;
+package com.ceiba.usuario.servicio;
 
 import com.ceiba.BasePrueba;
 import com.ceiba.dominio.excepcion.ExcepcionDuplicidad;
+import com.ceiba.dominio.excepcion.ExcepcionValorInvalido;
 import com.ceiba.usuario.modelo.entidad.Cita;
 import com.ceiba.usuario.modelo.entidad.Usuario;
 import com.ceiba.usuario.puerto.repositorio.RepositorioCita;
@@ -11,9 +12,11 @@ import com.ceiba.usuario.servicio.testdatabuilder.UsuarioTestDataBuilder;
 import org.junit.Test;
 import org.mockito.Mockito;
 
+import java.time.LocalDateTime;
+
 public class ServicioActualizarCitaTest {
 
-    @Test
+  /*  @Test
     public void validarCitaExistenciaPreviaTest() {
         // arrange
         Cita cita = new CitaTestDataBuilder().conId(1L).build();
@@ -23,5 +26,34 @@ public class ServicioActualizarCitaTest {
         // act - assert
         BasePrueba.assertThrows(() -> servicioActualizarCita.ejecutar(cita), ExcepcionDuplicidad.class,"El usuario ya existe en el sistema");
     }
-}
 */
+
+
+    @Test
+    public void valorAcordadoDespuesDeTerminarLaCitaTest(){
+        Cita cita = new CitaTestDataBuilder().build();
+        RepositorioCita repositorioCita = Mockito.mock(RepositorioCita.class);
+        Mockito.when(repositorioCita.obtener(Mockito.anyLong())).thenReturn(new
+                Cita(1l,
+                "Esta es una descripcion",
+                LocalDateTime.of(2021,04,20,10,20),
+                 LocalDateTime.of(2021,04,20,11, 20 ),
+                200.0,
+                 new Usuario(1L, "Emanuel", "31267050", "Credito")));
+        ServicioActualizarCita servicioActualizarCita = new ServicioActualizarCita(repositorioCita);
+
+        double valorEsperado=200.0-(200.0*0.10);
+
+        assertEquals(valorEsperado, servicioActualizarCita.valorAcordadoDespuesDeTerminarLaCita(cita));
+
+    }
+
+    private static void  assertEquals(double valorEsperado, double valorFinal) {
+
+   if(valorFinal!=valorEsperado){
+       throw new ExcepcionValorInvalido(valorFinal+ " Es diferente al esperado "+ valorEsperado);
+   }
+
+
+    }
+}
