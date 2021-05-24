@@ -12,13 +12,13 @@ public class ComandoUsuarioTestDataBuilder {
     private Long id;
     private String nombre;
     private String telefono;
-    private String metodopago;
+    private String metodoPago;
 
 
     public ComandoUsuarioTestDataBuilder() {
         nombre = UUID.randomUUID().toString();
         telefono = "1234";
-        metodopago = "credito";
+        metodoPago = "credito";
        // fecha = LocalDateTime.now();
     }
 
@@ -28,6 +28,6 @@ public class ComandoUsuarioTestDataBuilder {
     }
 
     public ComandoUsuario build() {
-        return new ComandoUsuario(id,nombre,telefono, metodopago);
+        return new ComandoUsuario(id,nombre,telefono, metodoPago);
     }
 }

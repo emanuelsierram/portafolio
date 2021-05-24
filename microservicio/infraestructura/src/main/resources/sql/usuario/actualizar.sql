@@ -1,5 +1,5 @@
 update usuario
 set nombre = :nombre,
 	telefono = :telefono,
-	metodopago = :metodopago
+	metodo_pago = :metodoPago
 where id = :id

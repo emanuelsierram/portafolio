@@ -21,7 +21,7 @@ public class Usuario {
     private Long id;
     private String nombre;
     private String telefono;
-    private String metodoDePago;
+    private String metodoPago;
 
     public Usuario(Long id, String nombre, String telefono, String metodoDePago) {
         validarObligatorio(nombre, SE_DEBE_INGRESAR_EL_NOMBRE_DE_USUARIO);
@@ -30,7 +30,7 @@ public class Usuario {
         this.id = id;
         this.nombre = nombre;
         this.telefono = telefono;
-        this.metodoDePago = metodoDePago;
+        this.metodoPago = metodoDePago;
 
     }
 

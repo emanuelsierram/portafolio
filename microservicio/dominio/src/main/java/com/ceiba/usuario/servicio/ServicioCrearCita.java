@@ -31,12 +31,12 @@ public class ServicioCrearCita{
     }
 
     public Long ejecutar(Cita cita) {
-
         validarExistenciaPrevia(cita);
         ValidarNoAgendarDiaSabado(cita.getFechaInicio());
         validarDuracionMinima(cita.getFechaInicio(), cita.getFechaFinal());
         validarIntervalo(cita.getFechaInicio(), cita.getFechaFinal());
-        cita.setValorAcordado(valorAcordadoPorMetodoDePago(cita));
+       cita.setValorAcordado(valorAcordadoPorMetodoDePago(cita));
+       System.out.println("PRO");
         return this.repositorioCita.crear(cita);
     }
 
@@ -44,6 +44,7 @@ public class ServicioCrearCita{
         boolean existe = this.repositorioCita.existe(cita.getFechaInicio());
 
         if(existe) {
+
             throw new ExcepcionDuplicidad(YA_EXISTE_CITA_EN_EL_HORARIO);
         }
     }
@@ -56,7 +57,7 @@ public class ServicioCrearCita{
     }
 
     public double valorAcordadoPorMetodoDePago(Cita cita){
-        if(cita.getUsuario().getMetodoDePago().equalsIgnoreCase("credito")){
+        if(cita.getMetodoPago().equalsIgnoreCase("credito")){
             return cita.getValorAcordado()-(cita.getValorAcordado()*0.07);
         }
         return cita.getValorAcordado();

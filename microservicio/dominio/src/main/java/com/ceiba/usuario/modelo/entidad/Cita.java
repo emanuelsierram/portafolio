@@ -24,10 +24,10 @@ public class Cita{
     private LocalDateTime fechaInicio;
     private LocalDateTime fechaFinal;
     private Double valorAcordado;
-    private Usuario usuario;
+    private String metodoPago;
 
 
-    public Cita(Long id,String descripcion, LocalDateTime fechaInicio, LocalDateTime fechaFinal, Double valorAcordado, Usuario usuario) {
+    public Cita(Long id,String descripcion, LocalDateTime fechaInicio, LocalDateTime fechaFinal, Double valorAcordado, String metodoPago) {
       validarObligatorio(descripcion, SE_DEBE_INGRESAR_LA_DESCRIPCION);
        validarObligatorio(fechaInicio, SE_DEBE_INGRESAR_LA_FECHA_INICIO);
        validarObligatorio(fechaFinal, SE_DEBE_INGRESAR_LA_FECHA_FINAL);
@@ -37,7 +37,7 @@ public class Cita{
         this.fechaInicio = fechaInicio;
         this.fechaFinal = fechaFinal;
         this.valorAcordado = valorAcordado;
-        this.usuario = usuario;
+        this.metodoPago = metodoPago;
 
     }
 

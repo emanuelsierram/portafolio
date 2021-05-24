@@ -1,1 +1,1 @@
-select count(1) from usuario where descripcion = :descripcion
+select count(1) from cita where fecha_inicio = :fecha_inicio

@@ -16,12 +16,12 @@ public class MapeoUsuario implements RowMapper<DtoUsuario>, MapperResult {
         Long id = resultSet.getLong("id");
         String nombre = resultSet.getString("nombre");
         String telefono = resultSet.getString("telefono");
-        String metodopago = resultSet.getString("metodopago");
+        String metodoPago = resultSet.getString("metodo_pago");
 
 
       //  LocalDateTime fecha = extraerLocalDateTime(resultSet, "fecha_creacion");
 
-        return new DtoUsuario(id,nombre,telefono, metodopago);
+        return new DtoUsuario(id,nombre,telefono, metodoPago);
     }
 
 }

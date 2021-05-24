@@ -28,9 +28,4 @@ public interface RepositorioCita{
     void actualizar(Cita cita);
 
 
-    /**
-     * Permite actualizar un usuario
-     * @param id
-     */
-    Cita obtener(Long id);
 }
