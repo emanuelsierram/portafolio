@@ -3,9 +3,7 @@
 package com.ceiba.usuario.controlador;
 
 import com.ceiba.usuario.consulta.ManejadorListarCitas;
-import com.ceiba.usuario.consulta.ManejadorListarUsuarios;
 import com.ceiba.usuario.modelo.dto.DtoCita;
-import com.ceiba.usuario.modelo.dto.DtoUsuario;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -14,11 +14,11 @@ public class MapeoCita implements RowMapper<DtoCita>, MapperResult {
     public DtoCita mapRow(ResultSet resultSet, int rowNum) throws SQLException {
         Long id = resultSet.getLong("id");
         String descripcion = resultSet.getString("descripcion");
-        LocalDateTime fecha_inicio = extraerLocalDateTime(resultSet, "fecha_inicio");
-        LocalDateTime fecha_final = extraerLocalDateTime(resultSet, "fecha_final");
+        LocalDateTime fechaInicio = extraerLocalDateTime(resultSet, "fecha_inicio");
+        LocalDateTime fechaFinal = extraerLocalDateTime(resultSet, "fecha_final");
         Double valor = resultSet.getDouble("valor");
         String metodoPago = resultSet.getString("metodo_pago");
-        return new DtoCita(id,descripcion,fecha_inicio, fecha_final, valor, metodoPago);
+        return new DtoCita(id,descripcion,fechaInicio, fechaFinal, valor, metodoPago);
 
     }
 }

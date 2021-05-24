@@ -69,8 +69,8 @@ public class ServicioCrearCita{
     }
 
     public void validarIntervalo(LocalDateTime fechaInicioIngresada, LocalDateTime fechaFinalIngresada){
-        LocalTime tiempoInicioNuevo= LocalTime.of(06,01,22);
-        LocalTime tiempoFinalNuevo = LocalTime.of(22,01,22);
+        LocalTime tiempoInicioNuevo= LocalTime.of(06,1,22);
+        LocalTime tiempoFinalNuevo = LocalTime.of(22,1,22);
         LocalDate fechaInicioNueva = fechaInicioIngresada.toLocalDate();
         LocalDate fechaFinalNueva = fechaFinalIngresada.toLocalDate();
 

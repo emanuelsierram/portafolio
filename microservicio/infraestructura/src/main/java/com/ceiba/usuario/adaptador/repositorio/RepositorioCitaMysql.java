@@ -28,11 +28,7 @@ public class RepositorioCitaMysql implements RepositorioCita {
         this.customNamedParameterJdbcTemplate = customNamedParameterJdbcTemplate;
     }
     @Override
-    public Long crear(Cita cita) {
-
-       // DtoCita citaDto= new DtoCita(cita.getId(), cita.getDescripcion(), cita.getFechaInicio(), cita.getFechaFinal(), cita.getValorAcordado(), cita.getUsuario().getId());
-        return this.customNamedParameterJdbcTemplate.crear(cita, sqlCrear);
-    }
+    public Long crear(Cita cita) { return this.customNamedParameterJdbcTemplate.crear(cita, sqlCrear); }
 
     @Override
     public void actualizar(Cita cita) {

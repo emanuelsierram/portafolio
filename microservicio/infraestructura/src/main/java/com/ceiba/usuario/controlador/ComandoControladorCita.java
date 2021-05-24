@@ -21,8 +21,8 @@ public class ComandoControladorCita {
   private final ManejadorActualizarCita manejadorActualizarCita;
 
     @Autowired
-    public ComandoControladorCita(ManejadorCrearCita ManejadorCrearCita, ManejadorActualizarCita manejadorActualizarCita) {
-        this.manejadorCrearCita = ManejadorCrearCita;
+    public ComandoControladorCita(ManejadorCrearCita manejadorCrearCita, ManejadorActualizarCita manejadorActualizarCita) {
+        this.manejadorCrearCita = manejadorCrearCita;
        this.manejadorActualizarCita = manejadorActualizarCita;
     }
 
