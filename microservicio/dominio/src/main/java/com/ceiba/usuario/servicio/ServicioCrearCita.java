@@ -11,7 +11,6 @@ import static java.time.temporal.ChronoUnit.MINUTES;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.chrono.ChronoLocalDateTime;
 
 public class ServicioCrearCita{
 
@@ -30,11 +29,10 @@ public class ServicioCrearCita{
 
     public Long ejecutar(Cita cita) {
         validarExistenciaPrevia(cita);
-        ValidarNoAgendarDiaSabado(cita.getFechaInicio());
+        validarNoAgendarDiaSabado(cita.getFechaInicio());
         validarDuracionMinima(cita.getFechaInicio(), cita.getFechaFinal());
         validarIntervalo(cita.getFechaInicio(), cita.getFechaFinal());
        cita.setValorAcordado(valorAcordadoPorMetodoDePago(cita));
-       System.out.println("PRO");
         return this.repositorioCita.crear(cita);
     }
 
@@ -47,15 +45,15 @@ public class ServicioCrearCita{
         }
     }
 
-    public  void ValidarNoAgendarDiaSabado(LocalDateTime fecha){
-        if(fecha.getDayOfWeek().name().equals("SATURDAY")) {
+    public  void validarNoAgendarDiaSabado(LocalDateTime fecha){
+        if("SATURDAY".equals(fecha.getDayOfWeek().name())) {
             throw new ExcepcionValorInvalido(NO_SE_PUEDE_AGENDAR_EN_DIA_SABADO);
         }
 
     }
 
     public double valorAcordadoPorMetodoDePago(Cita cita){
-        if(cita.getMetodoPago().equalsIgnoreCase("credito")){
+        if("credito".equalsIgnoreCase(cita.getMetodoPago())){
             return cita.getValorAcordado()-(cita.getValorAcordado()*0.07);
         }
         return cita.getValorAcordado();
@@ -71,8 +69,8 @@ public class ServicioCrearCita{
     }
 
     public void validarIntervalo(LocalDateTime fechaInicioIngresada, LocalDateTime fechaFinalIngresada){
-        LocalTime tiempoInicioNuevo= LocalTime.of(06,00,00);
-        LocalTime tiempoFinalNuevo = LocalTime.of(22,00,00);
+        LocalTime tiempoInicioNuevo= LocalTime.of(06,01,22);
+        LocalTime tiempoFinalNuevo = LocalTime.of(22,01,22);
         LocalDate fechaInicioNueva = fechaInicioIngresada.toLocalDate();
         LocalDate fechaFinalNueva = fechaFinalIngresada.toLocalDate();
 

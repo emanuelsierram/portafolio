@@ -20,7 +20,7 @@ public class ServicioCrearCitaTest {
     Cita cita = new CitaTestDataBuilder().conFecha(LocalDateTime.of(2019,04,20,10,00)).build();
     RepositorioCita repositorioCita = Mockito.mock(RepositorioCita.class);
     ServicioCrearCita servicioCrearCita = new ServicioCrearCita(repositorioCita);
-    BasePrueba.assertThrows(() -> servicioCrearCita.ValidarNoAgendarDiaSabado(cita.getFechaInicio()), ExcepcionValorInvalido.class, "No se puede agendar el dia sabado");
+    BasePrueba.assertThrows(() -> servicioCrearCita.validarNoAgendarDiaSabado(cita.getFechaInicio()), ExcepcionValorInvalido.class, "No se puede agendar el dia sabado");
     }
 
 

@@ -16,10 +16,6 @@ public class MapeoUsuario implements RowMapper<DtoUsuario>, MapperResult {
         String nombre = resultSet.getString("nombre");
         String telefono = resultSet.getString("telefono");
         String metodoPago = resultSet.getString("metodo_pago");
-
-
-      //  LocalDateTime fecha = extraerLocalDateTime(resultSet, "fecha_creacion");
-
         return new DtoUsuario(id,nombre,telefono, metodoPago);
     }
 
