@@ -32,6 +32,11 @@ public class ComandoCitaTestDataBuilder {
         return this;
     }
 
+    public ComandoCitaTestDataBuilder conFechaInicio(LocalDateTime fechaInicio){
+        this.fechaInicio = fechaInicio;
+        return this;
+    }
+
     public ComandoCita build() {
         return new ComandoCita(id,descripcion,fechaInicio,fechaFinal,valorAcordado,metodoPago);
     }

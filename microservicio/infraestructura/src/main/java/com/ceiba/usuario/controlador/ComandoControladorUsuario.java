@@ -35,7 +35,7 @@ public class ComandoControladorUsuario {
     public ComandoRespuesta<Long> crear(@RequestBody ComandoUsuario comandoUsuario) {
         return manejadorCrearUsuario.ejecutar(comandoUsuario);
     }
-/*
+
     @DeleteMapping(value="/{id}")
 	@ApiOperation("Eliminar Usuario")
 	public void eliminar(@PathVariable Long id) {
@@ -49,6 +49,6 @@ public class ComandoControladorUsuario {
 		manejadorActualizarUsuario.ejecutar(comandoUsuario);
 	}
 
- */
+
 }
 

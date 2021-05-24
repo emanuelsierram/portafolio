@@ -2,12 +2,12 @@ package com.ceiba.usuario.controlador;
 
 import com.ceiba.ApplicationMock;
 import com.ceiba.usuario.comando.ComandoCita;
-import com.ceiba.usuario.comando.ComandoUsuario;
 import com.ceiba.usuario.servicio.testdatabuilder.ComandoCitaTestDataBuilder;
-import com.ceiba.usuario.servicio.testdatabuilder.ComandoUsuarioTestDataBuilder;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;
@@ -20,7 +20,7 @@ import com.ceiba.usuario.controlador.ComandoControladorCita;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes= ApplicationMock.class)
 @WebMvcTest(ComandoControladorCita.class)
@@ -33,7 +33,7 @@ public class ComandoControladorCitaTest {
     private MockMvc mocMvc;
 
     @Test
-    public void crear() throws Exception{
+    public void test1Crear() throws Exception{
         // arrange
         ComandoCita cita = new ComandoCitaTestDataBuilder().build();
 
@@ -46,9 +46,8 @@ public class ComandoControladorCitaTest {
 
     }
 
-
     @Test
-    public void actualizar() throws Exception{
+    public void test2Actualizar() throws Exception{
         // arrange
         Long id = 1L;
         ComandoCita cita = new ComandoCitaTestDataBuilder().build();
@@ -59,18 +58,8 @@ public class ComandoControladorCitaTest {
                 .content(objectMapper.writeValueAsString(cita)))
                 .andExpect(status().isOk());
     }
-/*
-    @Test
-    public void eliminar() throws Exception {
-        // arrange
-        Long id = 2L;
 
-        // act - assert
-        mocMvc.perform(delete("/usuarios/{id}",id)
-                .contentType(MediaType.APPLICATION_JSON)
-                .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
-    }
-    */
+
+
 
 }
