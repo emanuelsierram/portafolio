@@ -4,7 +4,6 @@ import com.ceiba.dominio.excepcion.ExcepcionDuplicidad;
 import com.ceiba.dominio.excepcion.ExcepcionValorInvalido;
 import com.ceiba.usuario.modelo.entidad.Cita;
 import com.ceiba.usuario.puerto.repositorio.RepositorioCita;
-
 import static java.time.temporal.ChronoUnit.MINUTES;
 
 
@@ -40,7 +39,6 @@ public class ServicioCrearCita{
         boolean existe = this.repositorioCita.existe(cita.getFechaInicio());
 
         if(existe) {
-
             throw new ExcepcionDuplicidad(YA_EXISTE_CITA_EN_EL_HORARIO);
         }
     }
@@ -69,7 +67,7 @@ public class ServicioCrearCita{
     }
 
     public void validarIntervalo(LocalDateTime fechaInicioIngresada, LocalDateTime fechaFinalIngresada){
-        LocalTime tiempoInicioNuevo= LocalTime.of(06,1,22);
+        LocalTime tiempoInicioNuevo= LocalTime.of(6,1,22);
         LocalTime tiempoFinalNuevo = LocalTime.of(22,1,22);
         LocalDate fechaInicioNueva = fechaInicioIngresada.toLocalDate();
         LocalDate fechaFinalNueva = fechaFinalIngresada.toLocalDate();

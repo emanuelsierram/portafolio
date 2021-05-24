@@ -18,22 +18,18 @@ public class ServicioActualizarCita {
         this.daoCita=daoCita;
     }
     public void ejecutar(Cita cita) {
-
         cita.setValorAcordado(valorAcordadoDespuesDeTerminarLaCita(cita));
-
         this.repositorioCita.actualizar(cita);
     }
 
     public double valorAcordadoDespuesDeTerminarLaCita(Cita cita){
         DtoCita citaExistente = daoCita.listarPorId(cita.getId());
-
         if(cita.getFechaFinal().isAfter(citaExistente.getFechaFinal())){
             int minutos= (int) MINUTES.between(citaExistente.getFechaFinal(), cita.getFechaFinal());
           double cantidadDe30MinutosPasados=Math.floor(minutos/30.0);
           return citaExistente.getValorAcordado()-(citaExistente.getValorAcordado()*((cantidadDe30MinutosPasados*5.0)/100.0));
         }
         return cita.getValorAcordado();
-
     }
 
 

@@ -13,18 +13,6 @@ import java.time.LocalDateTime;
 
 public class ServicioActualizarCitaTest {
 
-  /*  @Test
-    public void validarCitaExistenciaPreviaTest() {
-        // arrange
-        Cita cita = new CitaTestDataBuilder().conId(1L).build();
-        RepositorioCita repositorioCita = Mockito.mock(RepositorioCita.class);
-        Mockito.when(repositorioCita.existeExcluyendoId(Mockito.anyLong(),Mockito.anyString())).thenReturn(true);
-        ServicioActualizarCita servicioActualizarCita = new ServicioActualizarCita(repositorioCita);
-        // act - assert
-        BasePrueba.assertThrows(() -> servicioActualizarCita.ejecutar(cita), ExcepcionDuplicidad.class,"El usuario ya existe en el sistema");
-    }
-*/
-
 
     @Test
     public void valorAcordadoDespuesDeTerminarLaCitaTest(){
@@ -39,9 +27,7 @@ public class ServicioActualizarCitaTest {
                 200.0,
                  "Credito"));
         ServicioActualizarCita servicioActualizarCita = new ServicioActualizarCita(repositorioCita, daoCita);
-
         double valorEsperado=200.0-(200.0*0.10);
-
         assertEquals(valorEsperado, servicioActualizarCita.valorAcordadoDespuesDeTerminarLaCita(cita));
 
     }
