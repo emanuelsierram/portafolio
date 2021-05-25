@@ -1,1 +1,1 @@
-insert into cita (descripcion, fecha_inicio, fecha_final, valor, metodo_pago) values (:descripcion, :fechaInicio, :fechaFinal, :valorAcordado, :metodoPago)
+insert into cita (descripcion, fecha_inicio, fecha_final, valor, id_usuario) values (:descripcion, :fechaInicio, :fechaFinal, :valorAcordado, :idUsuario)

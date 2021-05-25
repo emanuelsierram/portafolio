@@ -2,6 +2,8 @@ package com.ceiba.usuario.adaptador.repositorio;
 
 import com.ceiba.infraestructura.jdbc.CustomNamedParameterJdbcTemplate;
 import com.ceiba.infraestructura.jdbc.sqlstatement.SqlStatement;
+import com.ceiba.usuario.adaptador.dao.MapeoCita;
+import com.ceiba.usuario.modelo.dto.DtoCita;
 import com.ceiba.usuario.modelo.entidad.Cita;
 import com.ceiba.usuario.puerto.repositorio.RepositorioCita;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -24,6 +26,9 @@ public class RepositorioCitaMysql implements RepositorioCita {
     @SqlStatement(namespace="cita", value="actualizar")
     private static String sqlActualizar;
 
+    @SqlStatement(namespace = "cita", value = "listarPorId")
+    private static  String sqlListarPorId;
+
     public RepositorioCitaMysql(CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate) {
         this.customNamedParameterJdbcTemplate = customNamedParameterJdbcTemplate;
     }
@@ -43,6 +48,13 @@ public class RepositorioCitaMysql implements RepositorioCita {
         paramSource.addValue("fecha_inicio", fecha);
 
         return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlExiste,paramSource, Boolean.class);
+    }
+
+    @Override
+    public DtoCita listarPorId(Long id) {
+        MapSqlParameterSource paramSource = new MapSqlParameterSource();
+        paramSource.addValue("id", id);
+        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlListarPorId, paramSource, new MapeoCita());
     }
 
 

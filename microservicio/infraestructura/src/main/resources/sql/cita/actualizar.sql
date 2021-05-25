@@ -3,5 +3,5 @@ set descripcion = :descripcion,
 	fecha_inicio = :fechaInicio,
 	fecha_final = :fechaFinal,
 	valor= :valorAcordado,
-	metodo_pago= :metodoPago
+	id_usuario= :idUsuario
 where id = :id

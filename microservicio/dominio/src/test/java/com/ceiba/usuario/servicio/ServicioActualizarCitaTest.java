@@ -18,15 +18,14 @@ public class ServicioActualizarCitaTest {
     public void valorAcordadoDespuesDeTerminarLaCitaTest(){
         Cita cita = new CitaTestDataBuilder().build();
         RepositorioCita repositorioCita = Mockito.mock(RepositorioCita.class);
-        DaoCita daoCita = Mockito.mock(DaoCita.class);
-        Mockito.when(daoCita.listarPorId(Mockito.anyLong())).thenReturn(new
+        Mockito.when(repositorioCita.listarPorId(Mockito.anyLong())).thenReturn(new
                 DtoCita(1l,
                 "Esta es una descripcion",
                 LocalDateTime.of(2021,04,20,10,20),
                  LocalDateTime.of(2021,04,20,11, 20 ),
                 200.0,
-                 "Credito"));
-        ServicioActualizarCita servicioActualizarCita = new ServicioActualizarCita(repositorioCita, daoCita);
+                  1));
+        ServicioActualizarCita servicioActualizarCita = new ServicioActualizarCita(repositorioCita);
         double valorEsperado=200.0-(200.0*0.10);
         assertEquals(valorEsperado, servicioActualizarCita.valorAcordadoDespuesDeTerminarLaCita(cita));
 

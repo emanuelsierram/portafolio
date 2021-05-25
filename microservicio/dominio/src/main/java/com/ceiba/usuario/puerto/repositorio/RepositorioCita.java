@@ -1,5 +1,6 @@
 package com.ceiba.usuario.puerto.repositorio;
 
+import com.ceiba.usuario.modelo.dto.DtoCita;
 import com.ceiba.usuario.modelo.entidad.Cita;
 
 import java.time.LocalDateTime;
@@ -26,6 +27,13 @@ public interface RepositorioCita{
      * @param cita
      */
     void actualizar(Cita cita);
+
+
+    /**
+     * Permite actualizar un usuario
+     * @param id
+     */
+    DtoCita listarPorId(Long id);
 
 
 }

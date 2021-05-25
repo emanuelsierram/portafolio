@@ -2,6 +2,8 @@ package com.ceiba.usuario.adaptador.repositorio;
 
 import com.ceiba.infraestructura.jdbc.CustomNamedParameterJdbcTemplate;
 import com.ceiba.infraestructura.jdbc.sqlstatement.SqlStatement;
+import com.ceiba.usuario.adaptador.dao.MapeoUsuario;
+import com.ceiba.usuario.modelo.dto.DtoUsuario;
 import com.ceiba.usuario.modelo.entidad.Usuario;
 import com.ceiba.usuario.puerto.repositorio.RepositorioUsuario;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -26,6 +28,10 @@ public class RepositorioUsuarioMysql implements RepositorioUsuario {
 
     @SqlStatement(namespace="usuario", value="existeExcluyendoId") 
     private static String sqlExisteExcluyendoId;
+
+
+    @SqlStatement(namespace = "usuario", value = "listarPorId")
+    private static  String sqlListarPorId;
 
     public RepositorioUsuarioMysql(CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate) {
         this.customNamedParameterJdbcTemplate = customNamedParameterJdbcTemplate;
@@ -64,6 +70,13 @@ public class RepositorioUsuarioMysql implements RepositorioUsuario {
         paramSource.addValue("nombre", nombre);
 
         return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlExisteExcluyendoId,paramSource, Boolean.class);
+    }
+
+    @Override
+    public DtoUsuario listarPorId(Integer id) {
+        MapSqlParameterSource paramSource = new MapSqlParameterSource();
+        paramSource.addValue("id", id);
+        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlListarPorId, paramSource, new MapeoUsuario());
     }
 
 }

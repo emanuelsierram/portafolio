@@ -20,5 +20,5 @@ public class ComandoCita {
     private LocalDateTime fechaInicio;
     private LocalDateTime fechaFinal;
     private Double valorAcordado;
-    private String metodoPago;
+    private Integer idUsuario;
 }

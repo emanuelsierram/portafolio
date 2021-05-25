@@ -28,13 +28,13 @@ public class BeanServicio {
     }
 
     @Bean
-    public ServicioCrearCita servicioCrearCita(RepositorioCita repositorioCita) {
-        return new ServicioCrearCita(repositorioCita);
+    public ServicioCrearCita servicioCrearCita(RepositorioCita repositorioCita, RepositorioUsuario repositorioUsuario) {
+        return new ServicioCrearCita(repositorioCita, repositorioUsuario);
     }
 
     @Bean
-    public ServicioActualizarCita servicioActualizarCita (RepositorioCita repositorioCita, DaoCita daoCita){
-        return  new ServicioActualizarCita(repositorioCita, daoCita);
+    public ServicioActualizarCita servicioActualizarCita (RepositorioCita repositorioCita){
+        return  new ServicioActualizarCita(repositorioCita);
     }
 
 

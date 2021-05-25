@@ -11,11 +11,9 @@ public class ServicioActualizarCita {
 
 
     private final RepositorioCita repositorioCita;
-    private final DaoCita daoCita;
 
-    public ServicioActualizarCita(RepositorioCita repositorioCita, DaoCita daoCita){
+    public ServicioActualizarCita(RepositorioCita repositorioCita){
         this.repositorioCita=repositorioCita;
-        this.daoCita=daoCita;
     }
     public void ejecutar(Cita cita) {
         cita.setValorAcordado(valorAcordadoDespuesDeTerminarLaCita(cita));
@@ -23,7 +21,8 @@ public class ServicioActualizarCita {
     }
 
     public double valorAcordadoDespuesDeTerminarLaCita(Cita cita){
-        DtoCita citaExistente = daoCita.listarPorId(cita.getId());
+
+        DtoCita citaExistente = repositorioCita.listarPorId(cita.getId());
         if(cita.getFechaFinal().isAfter(citaExistente.getFechaFinal())){
             int minutos= (int) MINUTES.between(citaExistente.getFechaFinal(), cita.getFechaFinal());
           double cantidadDe30MinutosPasados=Math.floor(minutos/30.0);

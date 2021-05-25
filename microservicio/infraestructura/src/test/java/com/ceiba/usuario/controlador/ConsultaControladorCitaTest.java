@@ -6,6 +6,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -26,6 +27,7 @@ public class ConsultaControladorCitaTest {
     @Autowired
     private MockMvc mocMvc;
 
+    @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
     @Test
     public void listar() throws Exception {
         // arrange
@@ -34,25 +36,13 @@ public class ConsultaControladorCitaTest {
         mocMvc.perform(get("/citas")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(3)))
-                .andExpect(jsonPath("$[1].descripcion", is("Descripcion")));
+                .andExpect(jsonPath("$", hasSize(1)))
+                .andExpect(jsonPath("$[0].descripcion", is("Descripcion")));
     }
 
-    @Test
-    public  void listarPorId() throws Exception{
-
-        // arrange
-        Long id = 1L;
-
-        // act - assert
-        mocMvc.perform(get("/citas/{id}",id)
-                .contentType(MediaType.APPLICATION_JSON))
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(id));
 
 
-    }
+
 
 
 }

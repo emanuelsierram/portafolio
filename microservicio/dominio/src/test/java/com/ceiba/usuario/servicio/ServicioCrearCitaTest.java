@@ -3,8 +3,10 @@ package com.ceiba.usuario.servicio;
 import com.ceiba.BasePrueba;
 import com.ceiba.dominio.excepcion.ExcepcionDuplicidad;
 import com.ceiba.dominio.excepcion.ExcepcionValorInvalido;
+import com.ceiba.usuario.modelo.dto.DtoUsuario;
 import com.ceiba.usuario.modelo.entidad.Cita;
 import com.ceiba.usuario.puerto.repositorio.RepositorioCita;
+import com.ceiba.usuario.puerto.repositorio.RepositorioUsuario;
 import com.ceiba.usuario.servicio.testdatabuilder.CitaTestDataBuilder;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -15,32 +17,32 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class ServicioCrearCitaTest {
 
-    @Test
-    public void validarAgendamientoDiaSabado(){
-    Cita cita = new CitaTestDataBuilder().conFecha(LocalDateTime.of(2019,04,20,10,00)).build();
-    RepositorioCita repositorioCita = Mockito.mock(RepositorioCita.class);
-    ServicioCrearCita servicioCrearCita = new ServicioCrearCita(repositorioCita);
-    BasePrueba.assertThrows(() -> servicioCrearCita.validarNoAgendarDiaSabado(cita.getFechaInicio()), ExcepcionValorInvalido.class, "No se puede agendar el dia sabado");
-    }
 
 
     @Test
     public void validarCitaExistenciaPreviaTest() {
         // arrange
-       Cita usuario = new CitaTestDataBuilder().build();
+       Cita cita = new CitaTestDataBuilder().build();
         RepositorioCita repositorioCita = Mockito.mock(RepositorioCita.class);
-        Mockito.when(repositorioCita.existe(usuario.getFechaInicio())).thenReturn(true);
-        ServicioCrearCita servicioCrearUsuario = new ServicioCrearCita(repositorioCita);
+        RepositorioUsuario repositorioUsuario = Mockito.mock(RepositorioUsuario.class);
+        Mockito.when(repositorioCita.existe(cita.getFechaInicio())).thenReturn(true);
+        ServicioCrearCita servicioCrearUsuario = new ServicioCrearCita(repositorioCita, repositorioUsuario);
         // act - assert
 
-        BasePrueba.assertThrows(() -> servicioCrearUsuario.ejecutar(usuario), ExcepcionDuplicidad.class,"Ya existe cita en el horario establecido");
+        BasePrueba.assertThrows(() -> servicioCrearUsuario.ejecutar(cita), ExcepcionDuplicidad.class,"Ya existe cita en el horario establecido");
     }
 
     @Test
     public void validarValorAcordadoAntesDeLaCitaTest(){
         Cita cita = new CitaTestDataBuilder().build();
         RepositorioCita repositorioCita = Mockito.mock(RepositorioCita.class);
-       ServicioCrearCita servicioCrearCita = new ServicioCrearCita(repositorioCita);
+        RepositorioUsuario repositorioUsuario = Mockito.mock(RepositorioUsuario.class);
+        Mockito.when(repositorioUsuario.listarPorId(cita.getIdUsuario())).thenReturn(new DtoUsuario(
+                1L,
+                "Ema",
+                "3122078455",
+                "Credito"));
+        ServicioCrearCita servicioCrearCita = new ServicioCrearCita(repositorioCita, repositorioUsuario);
         assertEquals(cita.getValorAcordado()-(cita.getValorAcordado()*0.07), servicioCrearCita.valorAcordadoPorMetodoDePago(cita));
     }
 
@@ -50,9 +52,9 @@ public class ServicioCrearCitaTest {
                 LocalDateTime.of(2021,04,20,15,00),
                 LocalDateTime.of(2021,04,20,15,30)).build();
         RepositorioCita repositorioCita = Mockito.mock(RepositorioCita.class);
-        ServicioCrearCita servicioCrearCita = new ServicioCrearCita(repositorioCita);
-        BasePrueba.assertThrows(() -> servicioCrearCita.validarDuracionMinima(cita.getFechaInicio(), cita.getFechaFinal()), ExcepcionValorInvalido.class, "Cita minima de una hora");
-
+        RepositorioUsuario repositorioUsuario = Mockito.mock(RepositorioUsuario.class);
+        ServicioCrearCita servicioCrearCita = new ServicioCrearCita(repositorioCita, repositorioUsuario);
+        BasePrueba.assertThrows(() -> servicioCrearCita.ejecutar(cita), ExcepcionValorInvalido.class, "Cita minima de una hora");
     }
 
     @Test
@@ -61,11 +63,10 @@ public class ServicioCrearCitaTest {
                 LocalDateTime.of(2021,04,20,05,00),
                 LocalDateTime.of(2021,04,20,23,30)).build();
         RepositorioCita repositorioCita = Mockito.mock(RepositorioCita.class);
-        ServicioCrearCita servicioCrearCita = new ServicioCrearCita(repositorioCita);
+        RepositorioUsuario repositorioUsuario = Mockito.mock(RepositorioUsuario.class);
+        ServicioCrearCita servicioCrearCita = new ServicioCrearCita(repositorioCita, repositorioUsuario);
 
-        BasePrueba.assertThrows(()-> servicioCrearCita.validarIntervalo(cita.getFechaInicio(), cita.getFechaFinal()), ExcepcionValorInvalido.class, "horario tomado no se encuentra en el horario establecido: 6:00 am - 10:00pm");
-
-
+        BasePrueba.assertThrows(()-> servicioCrearCita.ejecutar(cita), ExcepcionValorInvalido.class, "horario tomado no se encuentra en el horario establecido: 6:00 am - 10:00pm");
     }
 
 

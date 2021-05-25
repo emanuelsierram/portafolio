@@ -17,8 +17,8 @@ public class MapeoCita implements RowMapper<DtoCita>, MapperResult {
         LocalDateTime fechaInicio = extraerLocalDateTime(resultSet, "fecha_inicio");
         LocalDateTime fechaFinal = extraerLocalDateTime(resultSet, "fecha_final");
         Double valor = resultSet.getDouble("valor");
-        String metodoPago = resultSet.getString("metodo_pago");
-        return new DtoCita(id,descripcion,fechaInicio, fechaFinal, valor, metodoPago);
+        Integer idUsuario = resultSet.getInt("id_usuario");
+        return new DtoCita(id,descripcion,fechaInicio, fechaFinal, valor, idUsuario);
 
     }
 }

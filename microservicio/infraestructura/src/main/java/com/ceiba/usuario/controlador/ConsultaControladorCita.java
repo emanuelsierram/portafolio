@@ -30,16 +30,4 @@ public class ConsultaControladorCita {
         return this.manejadorListarCitas.ejecutar();
     }
 
-    @GetMapping(value="/{id}")
-    public  DtoCita listarPorID(@PathVariable Long id){
-
-
-        return this.manejadorListarCitas.ejecutarPorId(id);
-    }
-
-
-
-
-
-
 }

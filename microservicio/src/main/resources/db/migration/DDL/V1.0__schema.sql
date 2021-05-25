@@ -4,9 +4,19 @@ create table cita (
  fecha_inicio datetime  null,
  fecha_final datetime  null,
  valor varchar(45) not null,
- metodo_pago varchar(45) not null,
+ id_usuario varchar(45) not null,
  primary key (id)
 );
 
+create table usuario (
+ id int(11) not null auto_increment,
+ nombre varchar(100) not null,
+ telefono varchar(45) not null,
+ metodo_pago varchar (45) not null,
+ primary key (id)
+);
 
-insert into cita(descripcion, fecha_inicio, fecha_final, valor, metodo_pago) values('Descripcion', now(), now(), 666.0, 'Credito')
+insert into usuario(nombre, telefono, metodo_pago) values ('Ema', '2122', 'credito');
+
+
+

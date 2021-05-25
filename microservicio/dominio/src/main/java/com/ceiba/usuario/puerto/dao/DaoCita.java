@@ -8,6 +8,6 @@ public interface DaoCita {
 
 
     List<DtoCita> listar();
-    DtoCita listarPorId(Long id);
+
 
 }

@@ -1,5 +1,6 @@
 package com.ceiba.usuario.puerto.repositorio;
 
+import com.ceiba.usuario.modelo.dto.DtoUsuario;
 import com.ceiba.usuario.modelo.entidad.Usuario;
 
 public interface RepositorioUsuario {
@@ -35,6 +36,13 @@ public interface RepositorioUsuario {
      * @return si existe o no
      */
     boolean existeExcluyendoId(Long id,String nombre);
+
+
+    /**
+     * Permite actualizar un usuario
+     * @param id
+     */
+    DtoUsuario listarPorId(Integer id);
 
 
 

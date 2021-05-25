@@ -17,8 +17,7 @@ public class DaoCitaMysql implements DaoCita {
     @SqlStatement(namespace="cita", value="listar")
     private static String sqlListar;
 
-    @SqlStatement(namespace = "cita", value = "listarPorId")
-    private static  String sqlListarPorId;
+
 
     public DaoCitaMysql(CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate) {
         this.customNamedParameterJdbcTemplate = customNamedParameterJdbcTemplate;
@@ -30,12 +29,7 @@ public class DaoCitaMysql implements DaoCita {
     }
 
 
-    @Override
-    public DtoCita listarPorId(Long id) {
-        MapSqlParameterSource paramSource = new MapSqlParameterSource();
-        paramSource.addValue("id", id);
-        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlListarPorId, paramSource, new MapeoCita());
-    }
+
 
 
 }

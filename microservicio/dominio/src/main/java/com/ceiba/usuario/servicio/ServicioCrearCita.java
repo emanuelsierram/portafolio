@@ -2,8 +2,12 @@ package com.ceiba.usuario.servicio;
 
 import com.ceiba.dominio.excepcion.ExcepcionDuplicidad;
 import com.ceiba.dominio.excepcion.ExcepcionValorInvalido;
+import com.ceiba.usuario.modelo.dto.DtoUsuario;
 import com.ceiba.usuario.modelo.entidad.Cita;
+import com.ceiba.usuario.modelo.entidad.Usuario;
 import com.ceiba.usuario.puerto.repositorio.RepositorioCita;
+import com.ceiba.usuario.puerto.repositorio.RepositorioUsuario;
+
 import static java.time.temporal.ChronoUnit.MINUTES;
 
 
@@ -14,28 +18,28 @@ import java.time.LocalTime;
 public class ServicioCrearCita{
 
     private static final String YA_EXISTE_CITA_EN_EL_HORARIO = "Ya existe cita en el horario establecido";
-    private static final String NO_SE_PUEDE_AGENDAR_EN_DIA_SABADO = "No se puede agendar el dia sabado";
     private static final String CITA_MINIMA_DE_UNA_HORA = "Cita minima de una hora";
     private static final String NO_ESTA_EN_EL_INTERVALO_DE_TIEMPO = "horario tomado no se encuentra en el horario establecido: 6:00 am - 10:00pm";
 
 
 
     private final RepositorioCita repositorioCita;
+    private  final RepositorioUsuario repositorioUsuario;
 
-    public ServicioCrearCita(RepositorioCita repositorioCita){
+    public ServicioCrearCita(RepositorioCita repositorioCita, RepositorioUsuario repositorioUsuario){
         this.repositorioCita=repositorioCita;
+        this.repositorioUsuario=repositorioUsuario;
     }
 
     public Long ejecutar(Cita cita) {
         validarExistenciaPrevia(cita);
-        validarNoAgendarDiaSabado(cita.getFechaInicio());
         validarDuracionMinima(cita.getFechaInicio(), cita.getFechaFinal());
         validarIntervalo(cita.getFechaInicio(), cita.getFechaFinal());
        cita.setValorAcordado(valorAcordadoPorMetodoDePago(cita));
         return this.repositorioCita.crear(cita);
     }
 
-    public void validarExistenciaPrevia(Cita cita) {
+    private void validarExistenciaPrevia(Cita cita) {
         boolean existe = this.repositorioCita.existe(cita.getFechaInicio());
 
         if(existe) {
@@ -43,30 +47,22 @@ public class ServicioCrearCita{
         }
     }
 
-    public  void validarNoAgendarDiaSabado(LocalDateTime fecha){
-        if("SATURDAY".equals(fecha.getDayOfWeek().name())) {
-            throw new ExcepcionValorInvalido(NO_SE_PUEDE_AGENDAR_EN_DIA_SABADO);
-        }
-
-    }
-
     public double valorAcordadoPorMetodoDePago(Cita cita){
-        if("credito".equalsIgnoreCase(cita.getMetodoPago())){
+        DtoUsuario usuario = repositorioUsuario.listarPorId(cita.getIdUsuario());
+        if("credito".equalsIgnoreCase(usuario.getMetodoDePago())){
             return cita.getValorAcordado()-(cita.getValorAcordado()*0.07);
         }
         return cita.getValorAcordado();
     }
 
-    public void validarDuracionMinima(LocalDateTime fechaInicio, LocalDateTime fechaFinal) {
+    private void validarDuracionMinima(LocalDateTime fechaInicio, LocalDateTime fechaFinal) {
         int minutos= (int) MINUTES.between(fechaInicio, fechaFinal);
         if(minutos<60) {
             throw new ExcepcionValorInvalido(CITA_MINIMA_DE_UNA_HORA);
         }
-
-
     }
 
-    public void validarIntervalo(LocalDateTime fechaInicioIngresada, LocalDateTime fechaFinalIngresada){
+    private void validarIntervalo(LocalDateTime fechaInicioIngresada, LocalDateTime fechaFinalIngresada){
         LocalTime tiempoInicioNuevo= LocalTime.of(6,1,22);
         LocalTime tiempoFinalNuevo = LocalTime.of(22,1,22);
         LocalDate fechaInicioNueva = fechaInicioIngresada.toLocalDate();
