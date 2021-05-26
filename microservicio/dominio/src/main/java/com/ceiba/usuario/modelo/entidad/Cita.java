@@ -18,7 +18,7 @@ public class Cita{
     private static final String SE_DEBE_INGRESAR_LA_FECHA_FINAL = "Se debe ingresar la fecha final";
     private static final String SE_DEBE_INGRESAR_EL_VALOR_ACORDADO= "Se debe ingresar el valor acordado";
     private static final String NO_SE_PUEDE_AGENDAR_EN_DIA_SABADO = "No se puede agendar el dia sabado";
-
+    private static final String LA_FECHA_FINAL_NO_DEBE_SER_MENOR = "La fecha final no debe ser mayor a la fecha inicial";
 
     private static final String SATURDAY = "sabado";
 
@@ -35,7 +35,7 @@ public class Cita{
       validarObligatorio(descripcion, SE_DEBE_INGRESAR_LA_DESCRIPCION);
        validarObligatorio(fechaInicio, SE_DEBE_INGRESAR_LA_FECHA_INICIO);
        validarObligatorio(fechaFinal, SE_DEBE_INGRESAR_LA_FECHA_FINAL);
-        validarObligatorio(valorAcordado, SE_DEBE_INGRESAR_EL_VALOR_ACORDADO);
+       validarObligatorio(valorAcordado, SE_DEBE_INGRESAR_EL_VALOR_ACORDADO);
 
         this.id = id;
         this.descripcion = descripcion;
@@ -44,11 +44,19 @@ public class Cita{
         this.valorAcordado = valorAcordado;
         this.idUsuario = idUsuario;
         validarNoAgendarDiaSabado();
+        validarIngresoDeFechas();
     }
 
     private  void validarNoAgendarDiaSabado(){
         if(SATURDAY.equals(this.fechaInicio.getDayOfWeek().name())) {
             throw new ExcepcionValorInvalido(NO_SE_PUEDE_AGENDAR_EN_DIA_SABADO);
+        }
+
+    }
+
+    private void validarIngresoDeFechas(){
+        if(this.fechaFinal.isBefore(this.fechaInicio)){
+            throw new ExcepcionValorInvalido(LA_FECHA_FINAL_NO_DEBE_SER_MENOR);
         }
 
     }

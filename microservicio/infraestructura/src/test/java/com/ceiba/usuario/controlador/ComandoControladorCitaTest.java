@@ -4,6 +4,7 @@ import com.ceiba.ApplicationMock;
 import com.ceiba.usuario.comando.ComandoCita;
 import com.ceiba.usuario.servicio.testdatabuilder.ComandoCitaTestDataBuilder;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.After;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,16 +12,20 @@ import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import com.ceiba.usuario.controlador.ComandoControladorCita;
 
+import javax.activation.DataSource;
+import java.beans.Statement;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes= ApplicationMock.class)
 @WebMvcTest(ComandoControladorCita.class)
@@ -33,7 +38,7 @@ public class ComandoControladorCitaTest {
     private MockMvc mocMvc;
 
     @Test
-    public void test1Crear() throws Exception{
+    public void crear() throws Exception{
         // arrange
         ComandoCita cita = new ComandoCitaTestDataBuilder().build();
 
@@ -45,9 +50,9 @@ public class ComandoControladorCitaTest {
                 .andExpect(content().json("{'valor': 2}"));
 
     }
-
+    @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
     @Test
-    public void test2Actualizar() throws Exception{
+    public void actualizar() throws Exception{
         // arrange
         Long id = 1L;
         ComandoCita cita = new ComandoCitaTestDataBuilder().build();
@@ -58,6 +63,10 @@ public class ComandoControladorCitaTest {
                 .content(objectMapper.writeValueAsString(cita)))
                 .andExpect(status().isOk());
     }
+
+
+
+
 
 
 
