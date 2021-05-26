@@ -37,7 +37,7 @@ public class ServicioCrearCita{
         validarExistenciaPrevia(cita);
         validarDuracionMinima(cita.getFechaInicio(), cita.getFechaFinal());
         validarIntervalo(cita.getFechaInicio(), cita.getFechaFinal());
-       cita.setValorAcordado(valorAcordadoPorMetodoDePago(cita));
+        cita.setValorAcordado(valorAcordadoPorMetodoDePago(cita));
         return this.repositorioCita.crear(cita);
     }
 

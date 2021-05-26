@@ -8,7 +8,7 @@ import com.ceiba.portafolio.modelo.entidad.Cita;
 import com.ceiba.portafolio.puerto.repositorio.RepositorioCita;
 import com.ceiba.portafolio.puerto.repositorio.RepositorioTrabajador;
 import com.ceiba.portafolio.servicio.ServicioCrearCita;
-import com.ceiba.trabajador.servicio.testdatabuilder.CitaTestDataBuilder;
+import com.ceiba.portafolio.servicio.testdatabuilder.CitaTestDataBuilder;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -32,6 +32,23 @@ public class ServicioCrearCitaTest {
     }
 
     @Test
+    public void validarIngresoDeFechas(){
+        CitaTestDataBuilder citaTestDataBuilder = new CitaTestDataBuilder().conFechas(
+                LocalDateTime.of(2021,04,20,13,30),
+                LocalDateTime.of(2021,04,20,11,30)
+        );
+        BasePrueba.assertThrows(() -> citaTestDataBuilder.build(), ExcepcionValorInvalido.class, "La fecha final no debe ser mayor a la fecha inicial");
+    }
+
+    @Test
+    public void validarNoAngendarDiaSabado(){
+        CitaTestDataBuilder citaTestDataBuilder = new CitaTestDataBuilder().conFecha(
+                LocalDateTime.of(2019,04,20,20,15)
+        );
+        BasePrueba.assertThrows(()-> citaTestDataBuilder.build(), ExcepcionValorInvalido.class,"No se puede agendar el dia sabado");
+    }
+
+    @Test
     public void validarCitaExistenciaPreviaTest() {
         // arrange
         Cita cita = new CitaTestDataBuilder().build();
@@ -39,6 +56,8 @@ public class ServicioCrearCitaTest {
         // act - assert
         BasePrueba.assertThrows(() -> servicioCrearCita.ejecutar(cita), ExcepcionDuplicidad.class,"Ya existe cita en el horario establecido");
     }
+
+
 
     @Test
     public void validarValorAcordadoAntesDeLaCitaTest(){

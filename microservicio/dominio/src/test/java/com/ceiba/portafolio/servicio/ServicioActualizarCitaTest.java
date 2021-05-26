@@ -5,7 +5,7 @@ import com.ceiba.portafolio.modelo.dto.DtoCita;
 import com.ceiba.portafolio.modelo.entidad.Cita;
 import com.ceiba.portafolio.servicio.ServicioActualizarCita;
 import com.ceiba.portafolio.puerto.repositorio.RepositorioCita;
-import com.ceiba.trabajador.servicio.testdatabuilder.CitaTestDataBuilder;
+import com.ceiba.portafolio.servicio.testdatabuilder.CitaTestDataBuilder;
 import org.junit.Test;
 import org.mockito.Mockito;
 

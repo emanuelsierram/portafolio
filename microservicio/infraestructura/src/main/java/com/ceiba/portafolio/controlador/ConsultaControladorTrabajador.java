@@ -15,7 +15,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 @RestController
-@RequestMapping("/trabajadors")
+@RequestMapping("/trabajadores")
 @Api(tags={"Controlador consulta trabajador"})
 public class ConsultaControladorTrabajador {
 
@@ -26,7 +26,7 @@ public class ConsultaControladorTrabajador {
     }
 
     @GetMapping
-    @ApiOperation("Listar trabajadors")
+    @ApiOperation("Listar trabajadores")
     public List<DtoTrabajador> listar() {
         return this.manejadorListarTrabajador.ejecutar();
     }

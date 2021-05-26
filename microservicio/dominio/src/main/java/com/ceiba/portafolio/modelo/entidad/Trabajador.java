@@ -11,7 +11,7 @@ public class Trabajador {
 
     private static final String SE_DEBE_INGRESAR_EL_TELEFONO = "Se debe ingresar el telefono";
     private static final String SE_DEBE_INGRESAR_EL_NOMBRE_DE_TRABAJADOR = "Se debe ingresar el nombre del trabajador";
-    private static final String SE_DEBE_INGRESAR_EL_METODO_DE_PAGO = "Se debe ingresar el nombre de trabajador";
+    private static final String SE_DEBE_INGRESAR_EL_METODO_DE_PAGO = "Se debe ingresar el nombre del trabajador";
 
     private Long id;
     private String nombre;

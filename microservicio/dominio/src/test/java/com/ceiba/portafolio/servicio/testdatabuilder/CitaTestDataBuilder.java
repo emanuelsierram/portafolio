@@ -1,4 +1,4 @@
-package com.ceiba.trabajador.servicio.testdatabuilder;
+package com.ceiba.portafolio.servicio.testdatabuilder;
 
 import com.ceiba.portafolio.modelo.entidad.Cita;
 import com.ceiba.portafolio.modelo.entidad.Trabajador;

@@ -7,23 +7,23 @@ import com.ceiba.portafolio.puerto.repositorio.RepositorioTrabajador;
 
 public class ServicioActualizarTrabajador {
 
-    private static final String EL_trabajador_YA_EXISTE_EN_EL_SISTEMA = "El trabajador ya existe en el sistema";
+    private static final String EL_TRABAJADOR_YA_EXISTE_EN_EL_SISTEMA = "El trabajador ya existe en el sistema";
 
-    private final RepositorioTrabajador repositoriotrabajador;
+    private final RepositorioTrabajador repositorioTrabajador;
 
-    public ServicioActualizarTrabajador(RepositorioTrabajador repositoriotrabajador) {
-        this.repositoriotrabajador = repositoriotrabajador;
+    public ServicioActualizarTrabajador(RepositorioTrabajador repositorioTrabajador) {
+        this.repositorioTrabajador = repositorioTrabajador;
     }
 
     public void ejecutar(Trabajador trabajador) {
         validarExistenciaPrevia(trabajador);
-        this.repositoriotrabajador.actualizar(trabajador);
+        this.repositorioTrabajador.actualizar(trabajador);
     }
 
     private void validarExistenciaPrevia(Trabajador trabajador) {
-        boolean existe = this.repositoriotrabajador.existeExcluyendoId(trabajador.getId(),trabajador.getNombre());
+        boolean existe = this.repositorioTrabajador.existeExcluyendoId(trabajador.getId(),trabajador.getNombre());
         if(existe) {
-            throw new ExcepcionDuplicidad(EL_trabajador_YA_EXISTE_EN_EL_SISTEMA);
+            throw new ExcepcionDuplicidad(EL_TRABAJADOR_YA_EXISTE_EN_EL_SISTEMA);
         }
     }
 }
