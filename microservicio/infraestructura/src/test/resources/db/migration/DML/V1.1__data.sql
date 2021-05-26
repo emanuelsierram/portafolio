@@ -1,2 +1,2 @@
-insert into cita(descripcion, fecha_inicio, fecha_final, valor, id_usuario) values('Descripcion', now(), now(), 666.0, 1);
-insert into usuario(nombre, telefono, metodo_pago) values ('Ema', '2122', 'credito');
+insert into cita(descripcion, fecha_inicio, fecha_final, valor, id_trabajador) values('Descripcion', now(), now(), 666.0, 1);
+insert into trabajador(nombre, telefono, metodo_pago) values ('Ema', '2122', 'credito');

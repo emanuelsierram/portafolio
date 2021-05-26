@@ -1,0 +1,1 @@
+insert into trabajador (nombre, telefono, metodo_pago) values (:nombre, :telefono, :metodoPago)

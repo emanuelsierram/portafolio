@@ -3,5 +3,5 @@ set descripcion = :descripcion,
 	fecha_inicio = :fechaInicio,
 	fecha_final = :fechaFinal,
 	valor= :valorAcordado,
-	id_usuario= :idUsuario
+	id_trabajador= :idTrabajador
 where id = :id

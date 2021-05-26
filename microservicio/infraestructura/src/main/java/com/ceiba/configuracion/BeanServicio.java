@@ -1,9 +1,9 @@
 package com.ceiba.configuracion;
 
-import com.ceiba.usuario.puerto.dao.DaoCita;
-import com.ceiba.usuario.puerto.repositorio.RepositorioCita;
-import com.ceiba.usuario.puerto.repositorio.RepositorioUsuario;
-import com.ceiba.usuario.servicio.*;
+
+import com.ceiba.portafolio.puerto.repositorio.RepositorioCita;
+import com.ceiba.portafolio.puerto.repositorio.RepositorioTrabajador;
+import com.ceiba.portafolio.servicio.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -12,24 +12,24 @@ public class BeanServicio {
 
 
     @Bean
-    public ServicioCrearUsuario servicioCrearUsuario(RepositorioUsuario repositorioUsuario) {
-        return new ServicioCrearUsuario(repositorioUsuario);
+    public ServicioCrearTrabajador servicioCrearTrabajador(RepositorioTrabajador repositorioTrabajador) {
+        return new ServicioCrearTrabajador(repositorioTrabajador);
     }
 
 
     @Bean
-    public ServicioEliminarUsuario servicioEliminarUsuario(RepositorioUsuario repositorioUsuario) {
-        return new ServicioEliminarUsuario(repositorioUsuario);
+    public ServicioEliminarTrabajador servicioEliminarTrabajador(RepositorioTrabajador repositorioTrabajador) {
+        return new ServicioEliminarTrabajador(repositorioTrabajador);
     }
 
     @Bean
-    public ServicioActualizarUsuario servicioActualizarUsuario(RepositorioUsuario repositorioUsuario) {
-        return new ServicioActualizarUsuario(repositorioUsuario);
+    public ServicioActualizarTrabajador servicioActualizartrabajador(RepositorioTrabajador repositorioTrabajador) {
+        return new ServicioActualizarTrabajador(repositorioTrabajador);
     }
 
     @Bean
-    public ServicioCrearCita servicioCrearCita(RepositorioCita repositorioCita, RepositorioUsuario repositorioUsuario) {
-        return new ServicioCrearCita(repositorioCita, repositorioUsuario);
+    public ServicioCrearCita servicioCrearCita(RepositorioCita repositorioCita, RepositorioTrabajador repositorioTrabajador) {
+        return new ServicioCrearCita(repositorioCita, repositorioTrabajador);
     }
 
     @Bean
