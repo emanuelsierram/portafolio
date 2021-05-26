@@ -12,13 +12,7 @@ import com.ceiba.BasePrueba;
 
 public class ServicioCrearTrabajadorTest {
 
-    @Test
-    public void validarEspecificacionesDelTrabajador() {
-        // arrange
-        TrabajadorTestDataBuilder trabajadorTestDataBuilder = new TrabajadorTestDataBuilder().conTelefono("3017768234");
-        // act - assert
-        BasePrueba.assertThrows(() -> trabajadorTestDataBuilder.build(), ExcepcionLongitudValor.class, "La clave debe tener una longitud mayor o igual a 4");
-    }
+   
 
     @Test
     public void validarUsuarioExistenciaPreviaTest() {
