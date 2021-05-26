@@ -4,7 +4,6 @@ import com.ceiba.dominio.excepcion.ExcepcionDuplicidad;
 import com.ceiba.dominio.excepcion.ExcepcionValorInvalido;
 import com.ceiba.usuario.modelo.dto.DtoUsuario;
 import com.ceiba.usuario.modelo.entidad.Cita;
-import com.ceiba.usuario.modelo.entidad.Usuario;
 import com.ceiba.usuario.puerto.repositorio.RepositorioCita;
 import com.ceiba.usuario.puerto.repositorio.RepositorioUsuario;
 

@@ -4,7 +4,6 @@ import com.ceiba.infraestructura.jdbc.CustomNamedParameterJdbcTemplate;
 import com.ceiba.infraestructura.jdbc.sqlstatement.SqlStatement;
 import com.ceiba.usuario.modelo.dto.DtoCita;
 import com.ceiba.usuario.puerto.dao.DaoCita;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

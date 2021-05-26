@@ -2,7 +2,6 @@ package com.ceiba.usuario.servicio;
 
 import com.ceiba.usuario.modelo.dto.DtoCita;
 import com.ceiba.usuario.modelo.entidad.Cita;
-import com.ceiba.usuario.puerto.dao.DaoCita;
 import com.ceiba.usuario.puerto.repositorio.RepositorioCita;
 
 import static java.time.temporal.ChronoUnit.MINUTES;
