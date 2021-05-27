@@ -19,13 +19,13 @@ import org.springframework.test.web.servlet.MockMvc;
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes= ApplicationMock.class)
 @WebMvcTest(ConsultaControladorTrabajador.class)
-public class ConsultaControladorUsuarioTest {
+public class ConsultaControladorTrabajadorTest {
 
     @Autowired
     private MockMvc mocMvc;
 
     @Test
-    public void listar() throws Exception {
+    public void listarTrabajadorTest() throws Exception {
         // arrange
 
         // act - assert

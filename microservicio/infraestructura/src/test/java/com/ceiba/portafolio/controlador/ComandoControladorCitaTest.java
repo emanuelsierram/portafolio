@@ -34,7 +34,7 @@ public class ComandoControladorCitaTest {
     private MockMvc mocMvc;
 
     @Test
-    public void crear() throws Exception{
+    public void crearCitaTest() throws Exception{
         // arrange
         ComandoCita cita = new ComandoCitaTestDataBuilder().build();
 
@@ -48,7 +48,7 @@ public class ComandoControladorCitaTest {
     }
     @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
     @Test
-    public void actualizar() throws Exception{
+    public void actualizarCitaTest() throws Exception{
         // arrange
         Long id = 1L;
         ComandoCita cita = new ComandoCitaTestDataBuilder().build();

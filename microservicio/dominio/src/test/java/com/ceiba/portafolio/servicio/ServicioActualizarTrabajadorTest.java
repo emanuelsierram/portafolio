@@ -12,7 +12,7 @@ import com.ceiba.BasePrueba;
 public class ServicioActualizarTrabajadorTest {
 
     @Test
-    public void validarUsuarioExistenciaPreviaTest() {
+    public void validarTrabajadoroExistenciaPreviaTest() {
         // arrange
         Trabajador trabajador = new TrabajadorTestDataBuilder().conId(2L).build();
         RepositorioTrabajador repositorioTrabajador = Mockito.mock(RepositorioTrabajador.class);

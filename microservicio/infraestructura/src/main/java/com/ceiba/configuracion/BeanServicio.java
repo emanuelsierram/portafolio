@@ -18,11 +18,6 @@ public class BeanServicio {
 
 
     @Bean
-    public ServicioEliminarTrabajador servicioEliminarTrabajador(RepositorioTrabajador repositorioTrabajador) {
-        return new ServicioEliminarTrabajador(repositorioTrabajador);
-    }
-
-    @Bean
     public ServicioActualizarTrabajador servicioActualizartrabajador(RepositorioTrabajador repositorioTrabajador) {
         return new ServicioActualizarTrabajador(repositorioTrabajador);
     }

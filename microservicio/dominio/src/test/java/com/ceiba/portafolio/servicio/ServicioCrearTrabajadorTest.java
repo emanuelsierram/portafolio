@@ -12,16 +12,16 @@ import com.ceiba.BasePrueba;
 
 public class ServicioCrearTrabajadorTest {
 
-   
+
 
     @Test
-    public void validarUsuarioExistenciaPreviaTest() {
+    public void validarTrabajadorExistenciaPreviaTest() {
         // arrange
         Trabajador trabajador = new TrabajadorTestDataBuilder().build();
         RepositorioTrabajador repositorioTrabajador = Mockito.mock(RepositorioTrabajador.class);
         Mockito.when(repositorioTrabajador.existe(Mockito.anyString())).thenReturn(true);
-        ServicioCrearTrabajador servicioCrearUsuario = new ServicioCrearTrabajador(repositorioTrabajador);
+        ServicioCrearTrabajador servicioCrearTrabajador = new ServicioCrearTrabajador(repositorioTrabajador);
         // act - assert
-        BasePrueba.assertThrows(() -> servicioCrearUsuario.ejecutar(trabajador), ExcepcionDuplicidad.class,"El trabajador ya existe en el sistema");
+        BasePrueba.assertThrows(() -> servicioCrearTrabajador.ejecutar(trabajador), ExcepcionDuplicidad.class,"El trabajador ya existe en el sistema");
     }
 }

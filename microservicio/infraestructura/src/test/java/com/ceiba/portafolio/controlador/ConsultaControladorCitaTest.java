@@ -28,7 +28,7 @@ public class ConsultaControladorCitaTest {
 
     @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
     @Test
-    public void listar() throws Exception {
+    public void listarCitaTest() throws Exception {
         // arrange
 
         // act - assert
