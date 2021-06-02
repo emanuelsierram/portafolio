@@ -1,19 +1,12 @@
 package com.ceiba.portafolio.servicio;
 
 import com.ceiba.dominio.excepcion.ExcepcionDuplicidad;
-import com.ceiba.dominio.excepcion.ExcepcionValorInvalido;
 import com.ceiba.portafolio.modelo.dto.DtoTrabajador;
 import com.ceiba.portafolio.modelo.entidad.Cita;
 import com.ceiba.portafolio.puerto.repositorio.RepositorioCita;
 import com.ceiba.portafolio.puerto.repositorio.RepositorioTrabajador;
 
 
-import static java.time.temporal.ChronoUnit.MINUTES;
-
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 public class ServicioCrearCita{
 

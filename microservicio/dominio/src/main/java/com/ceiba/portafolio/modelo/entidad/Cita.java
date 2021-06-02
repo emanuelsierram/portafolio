@@ -49,7 +49,6 @@ public class Cita{
         this.fechaFinal = fechaFinal;
         this.valorAcordado = valorAcordado;
         this.idTrabajador = idTrabajador;
-
         validarIngresoDeFechas();
         validarNoAgendarDiaSabado();
         validarDuracionMinima();
@@ -80,10 +79,10 @@ public class Cita{
     private void validarIntervaloDeCita(){
         LocalTime tiempoInicioMinimo= LocalTime.of(6,0,0);
         LocalTime tiempoFinalMaximo = LocalTime.of(22,0,0);
-        LocalDate fechaInicio = this.fechaInicio.toLocalDate();
-        LocalDate fechaFinal = this.fechaFinal.toLocalDate();
+        LocalDate soloFechaInicio = this.fechaInicio.toLocalDate();
+        LocalDate soloFechaFinal = this.fechaFinal.toLocalDate();
 
-        if(this.fechaInicio.isBefore(LocalDateTime.of(fechaInicio, tiempoInicioMinimo)) && this.fechaFinal.isAfter(LocalDateTime.of(fechaFinal, tiempoFinalMaximo))) {
+        if(this.fechaInicio.isBefore(LocalDateTime.of(soloFechaInicio, tiempoInicioMinimo)) && this.fechaFinal.isAfter(LocalDateTime.of(soloFechaFinal, tiempoFinalMaximo))) {
             throw new ExcepcionValorInvalido(NO_ESTA_EN_EL_INTERVALO_DE_TIEMPO);
         }
 
