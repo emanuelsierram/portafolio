@@ -21,9 +21,6 @@ public class RepositorioTrabajadorMysql implements RepositorioTrabajador {
     @SqlStatement(namespace="trabajador", value="actualizar")
     private static String sqlActualizar;
 
-    @SqlStatement(namespace="trabajador", value="eliminar")
-    private static String sqlEliminar;
-
     @SqlStatement(namespace="trabajador", value="existe")
     private static String sqlExiste;
 
@@ -43,13 +40,6 @@ public class RepositorioTrabajadorMysql implements RepositorioTrabajador {
         return this.customNamedParameterJdbcTemplate.crear(trabajador, sqlCrear);
     }
 
-    @Override
-    public void eliminar(Long id) {
-        MapSqlParameterSource paramSource = new MapSqlParameterSource();
-        paramSource.addValue("id", id);
-
-        this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().update(sqlEliminar, paramSource);
-    }
 
     @Override
     public boolean existe(String nombre) {

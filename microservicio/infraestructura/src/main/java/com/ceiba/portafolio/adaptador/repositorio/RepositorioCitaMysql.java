@@ -38,16 +38,13 @@ public class RepositorioCitaMysql implements RepositorioCita {
 
     @Override
     public void actualizar(Cita cita) {
-
         this.customNamedParameterJdbcTemplate.actualizar(cita, sqlActualizar);
     }
-
 
     @Override
     public boolean existe(LocalDateTime fecha) {
         MapSqlParameterSource paramSource = new MapSqlParameterSource();
         paramSource.addValue("fecha_inicio", fecha);
-
         return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlExiste,paramSource, Boolean.class);
     }
 

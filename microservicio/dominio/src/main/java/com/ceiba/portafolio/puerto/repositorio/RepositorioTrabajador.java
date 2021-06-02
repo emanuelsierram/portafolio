@@ -18,12 +18,6 @@ public interface RepositorioTrabajador {
     void actualizar(Trabajador trabajador);
 
     /**
-     * Permite eliminar un trabajador
-     * @param id
-     */
-    void eliminar(Long id);
-
-    /**
      * Permite validar si existe un trabajador con un nombre
      * @param nombre
      * @return si existe o no
