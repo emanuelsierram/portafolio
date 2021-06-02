@@ -22,22 +22,11 @@ public class CitaTestDataBuilder {
         idtrabajador=1;
     }
 
-    public CitaTestDataBuilder conId(Long id) {
-        this.id = id;
-        return this;
-    }
-
     public CitaTestDataBuilder conFecha(LocalDateTime fechaInicio){
         this.fechaInicio = fechaInicio;
         return this;
     }
 
-    public CitaTestDataBuilder conDescripcion(String descripcion){
-        this.descripcion = descripcion;
-        return this;
-
-
-    }
     public CitaTestDataBuilder conFechas(LocalDateTime fechaInicio, LocalDateTime fechaFinal){
 
         this.fechaInicio = fechaInicio;

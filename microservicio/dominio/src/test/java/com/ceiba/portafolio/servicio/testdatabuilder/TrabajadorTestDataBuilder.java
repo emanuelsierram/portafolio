@@ -14,11 +14,6 @@ public class TrabajadorTestDataBuilder {
         metodoPago = "Crédito";
     }
 
-    public TrabajadorTestDataBuilder conTelefono(String clave) {
-        this.telefono = telefono;
-        return this;
-    }
-
     public TrabajadorTestDataBuilder conId(Long id) {
         this.id = id;
         return this;

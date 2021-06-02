@@ -7,6 +7,9 @@ import com.ceiba.portafolio.puerto.repositorio.RepositorioCita;
 import static java.time.temporal.ChronoUnit.MINUTES;
 
 public class ServicioActualizarCita {
+    
+    private static final Double MEDIA_HORA=30.0;
+    private static final Double DESCUENTO_POR_CADA_30_MINUTOS_QUE_PASAN=0.05;
 
 
     private final RepositorioCita repositorioCita;
@@ -19,13 +22,13 @@ public class ServicioActualizarCita {
         this.repositorioCita.actualizar(cita);
     }
 
-    public double valorAcordadoDespuesDeTerminarLaCita(Cita cita){
+    private double valorAcordadoDespuesDeTerminarLaCita(Cita cita){
 
         DtoCita citaExistente = repositorioCita.listarPorId(cita.getId());
         if(cita.getFechaFinal().isAfter(citaExistente.getFechaFinal())){
             int minutos= (int) MINUTES.between(citaExistente.getFechaFinal(), cita.getFechaFinal());
-          double cantidadDe30MinutosPasados=Math.floor(minutos/30.0);
-          return citaExistente.getValorAcordado()-(citaExistente.getValorAcordado()*((cantidadDe30MinutosPasados*5.0)/100.0));
+          double cantidadDeMediaHorasPasadas=Math.floor(minutos/MEDIA_HORA);
+          return citaExistente.getValorAcordado()-(citaExistente.getValorAcordado()*(cantidadDeMediaHorasPasadas*DESCUENTO_POR_CADA_30_MINUTOS_QUE_PASAN));
         }
         return cita.getValorAcordado();
     }
