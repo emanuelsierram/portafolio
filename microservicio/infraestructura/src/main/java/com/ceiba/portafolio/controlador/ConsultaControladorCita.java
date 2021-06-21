@@ -6,10 +6,7 @@ import com.ceiba.portafolio.modelo.dto.DtoCita;
 import com.ceiba.portafolio.consulta.ManejadorListarCitas;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,10 +21,12 @@ public class ConsultaControladorCita {
         this.manejadorListarCitas = manejadorListarCitas;
     }
 
-    @GetMapping
+    @GetMapping("/{id}")
     @ApiOperation("Listar citas")
-    public List<DtoCita> listar() {
-        return this.manejadorListarCitas.ejecutar();
+    public List<DtoCita> listar(@PathVariable Integer id) {
+        return this.manejadorListarCitas.ejecutar(id);
     }
+
+
 
 }

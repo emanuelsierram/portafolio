@@ -37,6 +37,7 @@ public class ComandoControladorCitaTest {
     public void crearCitaTest() throws Exception{
         // arrange
         ComandoCita cita = new ComandoCitaTestDataBuilder().build();
+        System.out.println(cita.getFechaFinal());
 
         // act - assert
         mocMvc.perform(post("/citas")

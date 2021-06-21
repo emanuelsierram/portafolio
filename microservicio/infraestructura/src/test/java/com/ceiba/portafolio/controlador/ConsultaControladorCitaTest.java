@@ -32,7 +32,7 @@ public class ConsultaControladorCitaTest {
         // arrange
 
         // act - assert
-        mocMvc.perform(get("/citas")
+        mocMvc.perform(get("/citas/1")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(1)))

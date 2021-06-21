@@ -4,5 +4,6 @@ import java.util.List;
 
 public interface DaoCita {
     List<DtoCita> listar();
+    List<DtoCita> listarPorId(Integer id);
 
 }

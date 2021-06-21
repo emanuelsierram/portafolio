@@ -16,5 +16,5 @@ public class ManejadorListarCitas {
         this.daoCita = daoCita;
     }
 
-    public List<DtoCita> ejecutar(){ return this.daoCita.listar(); }
+    public List<DtoCita> ejecutar(Integer id){ return this.daoCita.listarPorId(id); }
 }

@@ -33,7 +33,7 @@ public class ConsultaControladorTrabajadorTest {
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(2)))
-                .andExpect(jsonPath("$[0].nombre", is("Ema")));
+                .andExpect(jsonPath("$[1].nombre", is("Ema")));
     }
 
 
