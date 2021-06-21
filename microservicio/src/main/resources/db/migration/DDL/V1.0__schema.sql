@@ -3,8 +3,8 @@ create table cita (
  descripcion varchar(100) not null,
  fecha_inicio datetime  null,
  fecha_final datetime  null,
- valor varchar(45) not null,
- id_trabajador varchar(45) not null,
+ valor double not null,
+ id_trabajador int(11) not null,
  primary key (id)
 );
 
@@ -16,7 +16,7 @@ create table trabajador (
  primary key (id)
 );
 
-insert into trabajador(nombre, telefono, metodo_pago) values ('Ema', '2122', 'credito');
+insert into trabajador(nombre, telefono, metodo_pago) values ('Emanuel Sierra', '32077828834', 'crédito');
 
 
 

@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.ceiba.portafolio.modelo.dto.DtoTrabajador;
 import com.ceiba.portafolio.consulta.ManejadorListarTrabajador;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+
 
 @RestController
 @RequestMapping("/trabajadores")

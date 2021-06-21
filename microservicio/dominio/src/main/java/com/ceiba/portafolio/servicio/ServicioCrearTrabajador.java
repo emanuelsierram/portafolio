@@ -18,7 +18,6 @@ public class ServicioCrearTrabajador {
 
     public Long ejecutar(Trabajador trabajador) {
         validarExistenciaPrevia(trabajador);
-
         return this.repositorioTrabajador.crear(trabajador);
     }
 
