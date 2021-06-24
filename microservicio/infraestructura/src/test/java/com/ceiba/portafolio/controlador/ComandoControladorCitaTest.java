@@ -1,7 +1,6 @@
 package com.ceiba.portafolio.controlador;
 
 import com.ceiba.ApplicationMock;
-import com.ceiba.portafolio.controlador.ComandoControladorCita;
 import com.ceiba.portafolio.comando.ComandoCita;
 import com.ceiba.portafolio.servicio.testdatabuilder.ComandoCitaTestDataBuilder;
 import com.fasterxml.jackson.databind.ObjectMapper;
