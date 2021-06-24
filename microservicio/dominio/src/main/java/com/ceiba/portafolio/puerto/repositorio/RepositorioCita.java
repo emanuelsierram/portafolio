@@ -24,17 +24,23 @@ public interface RepositorioCita{
     boolean existe(LocalDateTime fechaInicio);
 
     /**
-     * Permite actualizar un trabajador
+     * Permite actualizar una cita
      * @param cita
      */
     void actualizar(Cita cita);
 
 
     /**
-     * Permite actualizar un trabajador
+     * Permite actualizar una cita
      * @param id
      */
     DtoCita listarPorId(Long id);
+
+    /**
+     * Permite eliminar una cita
+     * @param id
+     */
+    void eliminar(Long id);
 
 
 }

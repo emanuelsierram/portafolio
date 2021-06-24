@@ -18,7 +18,12 @@ public class ServicioActualizarCita {
         this.repositorioCita=repositorioCita;
     }
     public void ejecutar(Cita cita) {
-        cita.setValorAcordado(valorAcordadoDespuesDeTerminarLaCita(cita));
+        if(valorAcordadoDespuesDeTerminarLaCita(cita)<0.0){
+            cita.setValorAcordado(0.0);
+        }
+        else {
+            cita.setValorAcordado(valorAcordadoDespuesDeTerminarLaCita(cita));
+        }
         this.repositorioCita.actualizar(cita);
     }
 

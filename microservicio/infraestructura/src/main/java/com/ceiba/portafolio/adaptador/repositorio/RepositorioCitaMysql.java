@@ -30,6 +30,9 @@ public class RepositorioCitaMysql implements RepositorioCita {
     @SqlStatement(namespace = "cita", value = "listarPorId")
     private static  String sqlListarPorId;
 
+    @SqlStatement(namespace = "cita", value = "eliminar")
+    private static  String sqlEliminar;
+
     public RepositorioCitaMysql(CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate) {
         this.customNamedParameterJdbcTemplate = customNamedParameterJdbcTemplate;
     }
@@ -53,6 +56,14 @@ public class RepositorioCitaMysql implements RepositorioCita {
         MapSqlParameterSource paramSource = new MapSqlParameterSource();
         paramSource.addValue("id", id);
         return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlListarPorId, paramSource, new MapeoCita());
+    }
+
+    @Override
+    public void eliminar(Long id) {
+        MapSqlParameterSource paramSource = new MapSqlParameterSource();
+        paramSource.addValue("id", id);
+
+        this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().update(sqlEliminar, paramSource);
     }
 
 

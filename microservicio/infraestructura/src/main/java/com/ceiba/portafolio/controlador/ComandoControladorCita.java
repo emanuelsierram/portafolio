@@ -6,6 +6,7 @@ import com.ceiba.ComandoRespuesta;
 import com.ceiba.portafolio.comando.ComandoCita;
 import com.ceiba.portafolio.comando.manejador.ManejadorActualizarCita;
 import com.ceiba.portafolio.comando.manejador.ManejadorCrearCita;
+import com.ceiba.portafolio.comando.manejador.ManejadorEliminarCita;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,12 +19,14 @@ import io.swagger.annotations.ApiOperation;
 public class ComandoControladorCita {
 
     private final ManejadorCrearCita manejadorCrearCita;
-  private final ManejadorActualizarCita manejadorActualizarCita;
+    private final ManejadorActualizarCita manejadorActualizarCita;
+    private final ManejadorEliminarCita manejadorEliminarCita;
 
     @Autowired
-    public ComandoControladorCita(ManejadorCrearCita manejadorCrearCita, ManejadorActualizarCita manejadorActualizarCita) {
+    public ComandoControladorCita(ManejadorCrearCita manejadorCrearCita, ManejadorActualizarCita manejadorActualizarCita, ManejadorEliminarCita manejadorEliminarCita) {
         this.manejadorCrearCita = manejadorCrearCita;
-       this.manejadorActualizarCita = manejadorActualizarCita;
+        this.manejadorActualizarCita = manejadorActualizarCita;
+        this.manejadorEliminarCita = manejadorEliminarCita;
     }
 
     @PostMapping
@@ -38,6 +41,13 @@ public class ComandoControladorCita {
         comandoCita.setId(id);
         manejadorActualizarCita.ejecutar(comandoCita);
     }
+
+    @DeleteMapping(value="/{id}")
+    @ApiOperation("Eliminar cita")
+    public void eliminar(@PathVariable Long id) {
+        manejadorEliminarCita.ejecutar(id);
+    }
+
 
 
 }

@@ -9,6 +9,8 @@ import org.springframework.stereotype.Component;
 import com.ceiba.portafolio.comando.ComandoTrabajador;
 import com.ceiba.portafolio.comando.fabrica.FabricaTrabajador;
 
+import java.sql.SQLOutput;
+
 @Component
 public class ManejadorCrearTrabajador implements ManejadorComandoRespuesta<ComandoTrabajador, ComandoRespuesta<Long>> {
 

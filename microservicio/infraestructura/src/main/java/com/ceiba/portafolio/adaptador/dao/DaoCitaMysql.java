@@ -20,14 +20,20 @@ public class DaoCitaMysql implements DaoCita {
     @SqlStatement(namespace = "cita", value = "listarPorIdTrabajador")
     private static  String sqlListarPorIdTrabajador;
 
+    @SqlStatement(namespace = "cita", value = "obtener")
+    private static  String sqlObtener;
+
 
     public DaoCitaMysql(CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate) {
         this.customNamedParameterJdbcTemplate = customNamedParameterJdbcTemplate;
     }
 
     @Override
-    public List<DtoCita> listar() {
-        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().query(sqlListar, new MapeoCita());
+    public DtoCita obtenerCita(Integer idTrabajador, Long id) {
+        MapSqlParameterSource paramSource = new MapSqlParameterSource();
+        paramSource.addValue("id_trabajador", idTrabajador);
+        paramSource.addValue("id", id);
+        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlObtener, paramSource, new MapeoCita());
     }
 
     @Override

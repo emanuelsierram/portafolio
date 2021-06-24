@@ -47,7 +47,6 @@ public class ComandoControladorCitaTest {
                 .andExpect(content().json("{'valor': 2}"));
 
     }
-    @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
     @Test
     public void actualizarCitaTest() throws Exception{
         // arrange
@@ -58,6 +57,18 @@ public class ComandoControladorCitaTest {
         mocMvc.perform(put("/citas/{id}",id)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(cita)))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void eliminar() throws Exception {
+        // arrange
+        Long id = 2L;
+
+        // act - assert
+        mocMvc.perform(delete("/citas/{id}",id)
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
 

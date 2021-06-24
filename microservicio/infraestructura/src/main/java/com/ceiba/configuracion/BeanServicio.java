@@ -7,6 +7,7 @@ import com.ceiba.portafolio.servicio.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+
 @Configuration
 public class BeanServicio {
 
@@ -30,6 +31,11 @@ public class BeanServicio {
     @Bean
     public ServicioActualizarCita servicioActualizarCita (RepositorioCita repositorioCita){
         return  new ServicioActualizarCita(repositorioCita);
+    }
+
+    @Bean
+    public ServicioEliminarCita servicioEliminarCita (RepositorioCita repositorioCita){
+        return  new ServicioEliminarCita(repositorioCita);
     }
 
 

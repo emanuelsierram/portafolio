@@ -27,6 +27,12 @@ public class ConsultaControladorCita {
         return this.manejadorListarCitas.ejecutar(id);
     }
 
+    @GetMapping("/{idTrabajador}/{id}")
+    @ApiOperation("Obtener cita")
+    public DtoCita obtener(@PathVariable Integer idTrabajador, @PathVariable Long id) {
+        return this.manejadorListarCitas.ejecutar(idTrabajador,id);
+    }
+
 
 
 }
