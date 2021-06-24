@@ -5,6 +5,7 @@ import com.ceiba.portafolio.modelo.entidad.Cita;
 
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public interface RepositorioCita{
     /**
@@ -31,7 +32,7 @@ public interface RepositorioCita{
 
 
     /**
-     * Permite actualizar una cita
+     * Permite buscar una cita por id
      * @param id
      */
     DtoCita listarPorId(Long id);
@@ -41,6 +42,16 @@ public interface RepositorioCita{
      * @param id
      */
     void eliminar(Long id);
+
+    /**
+     * Permite listar citas por trabajador
+     * @param id
+     * @return las citas
+     */
+    List<DtoCita> listarPorIdTrabajador(Integer id);
+
+
+
 
 
 }

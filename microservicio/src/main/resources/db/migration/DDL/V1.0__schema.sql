@@ -16,7 +16,8 @@ create table trabajador (
  primary key (id)
 );
 
-insert into trabajador(nombre, telefono, metodo_pago) values ('Emanuel Sierra', '32077828834', 'crédito');
+insert into trabajador(nombre, telefono, metodo_pago) values ('Emanuel Sierra', '32077828834', 'credito');
+insert into cita(descripcion, fecha_inicio, fecha_final, valor, id_trabajador) values ('Arreglo florar en el jardin', '2021-06-16 12:46:00', '2021-06-16 14:46:00', 200000.0, 1);
 
 
 

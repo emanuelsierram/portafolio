@@ -25,8 +25,12 @@ public class Cita{
     private static final String CITA_MINIMA_DE_UNA_HORA = "Cita minima de una hora";
     private static final String NO_ESTA_EN_EL_INTERVALO_DE_TIEMPO = "horario tomado no se encuentra en el horario establecido: 6:00 am - 10:00pm";
 
+
+
+    private static final LocalTime TIEMPO_DE_INICIO_MINIMO= LocalTime.of(6,0,0);
+    private static final LocalTime TIEMPO_MAXIMO=LocalTime.of(22,0,0);
     private static final String SATURDAY = "SATURDAY";
-    private static final int DURACION_MINIMA_CITA = 60;
+    private static final int DURACION_MINIMA_CITA = 59;
 
 
     private Long id;
@@ -77,16 +81,15 @@ public class Cita{
     }
 
     private void validarIntervaloDeCita(){
-        LocalTime tiempoInicioMinimo= LocalTime.of(6,0,0);
-        LocalTime tiempoFinalMaximo = LocalTime.of(22,0,0);
-        LocalDate soloFechaInicio = this.fechaInicio.toLocalDate();
-        LocalDate soloFechaFinal = this.fechaFinal.toLocalDate();
-
-        if(this.fechaInicio.isBefore(LocalDateTime.of(soloFechaInicio, tiempoInicioMinimo)) && this.fechaFinal.isAfter(LocalDateTime.of(soloFechaFinal, tiempoFinalMaximo))) {
+        LocalTime tiempoInicio = this.fechaInicio.toLocalTime();
+        LocalTime tiempoFinal = this.fechaFinal.toLocalTime();
+        LocalTime tiempoInicioMinimo= TIEMPO_DE_INICIO_MINIMO;
+        LocalTime tiempoFinalMaximo = TIEMPO_MAXIMO;
+        if (tiempoInicio.isBefore(tiempoInicioMinimo) ||
+            tiempoInicio.isAfter(tiempoFinalMaximo)   ||
+            tiempoFinal.isAfter(tiempoFinalMaximo)    ||
+            tiempoFinal.isBefore(tiempoInicioMinimo)) {
             throw new ExcepcionValorInvalido(NO_ESTA_EN_EL_INTERVALO_DE_TIEMPO);
         }
-
     }
-
-
 }

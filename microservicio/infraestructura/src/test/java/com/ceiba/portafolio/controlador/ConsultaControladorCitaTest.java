@@ -38,8 +38,8 @@ public class ConsultaControladorCitaTest {
         mocMvc.perform(get("/citas/1")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(1)))
-                .andExpect(jsonPath("$[0].descripcion", is("Descripcion")));
+                .andExpect(jsonPath("$", hasSize(2)))
+                .andExpect(jsonPath("$[1].descripcion", is("Descripcion")));
     }
 
     @Test

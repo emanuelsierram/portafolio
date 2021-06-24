@@ -11,6 +11,7 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Repository
 public class RepositorioCitaMysql implements RepositorioCita {
@@ -32,6 +33,9 @@ public class RepositorioCitaMysql implements RepositorioCita {
 
     @SqlStatement(namespace = "cita", value = "eliminar")
     private static  String sqlEliminar;
+
+    @SqlStatement(namespace = "cita", value = "listarPorIdTrabajador")
+    private static  String sqlListarPorIdTrabajador;
 
     public RepositorioCitaMysql(CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate) {
         this.customNamedParameterJdbcTemplate = customNamedParameterJdbcTemplate;
@@ -66,8 +70,12 @@ public class RepositorioCitaMysql implements RepositorioCita {
         this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().update(sqlEliminar, paramSource);
     }
 
+    @Override
+    public List<DtoCita> listarPorIdTrabajador(Integer id) {
+        MapSqlParameterSource paramSource = new MapSqlParameterSource();
+        paramSource.addValue("id_trabajador", id);
 
-
-
+        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().query(sqlListarPorIdTrabajador, paramSource, new MapeoCita());
+    }
 
 }
