@@ -20,7 +20,7 @@ public class Cita{
     private static final String SE_DEBE_INGRESAR_LA_FECHA_FINAL = "Se debe ingresar la fecha final";
     private static final String SE_DEBE_INGRESAR_EL_VALOR_ACORDADO= "Se debe ingresar el valor acordado";
     private static final String NO_SE_PUEDE_AGENDAR_EN_DIA_SABADO = "No se puede agendar el dia sabado";
-    private static final String LA_FECHA_FINAL_NO_DEBE_SER_MENOR = "La fecha final no debe ser mayor a la fecha inicial";
+    private static final String LA_FECHA_FINAL_NO_DEBE_SER_MENOR = "La fecha final no debe ser menor a la fecha inicial";
     private static final String CITA_MINIMA_DE_UNA_HORA = "Cita minima de una hora";
     private static final String NO_ESTA_EN_EL_INTERVALO_DE_TIEMPO = "horario tomado no se encuentra en el horario establecido: 6:00 am - 10:00pm";
 
