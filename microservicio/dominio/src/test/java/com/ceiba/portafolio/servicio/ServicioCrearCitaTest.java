@@ -43,7 +43,7 @@ public class ServicioCrearCitaTest {
                 LocalDateTime.of(2021,04,20,13,30),
                 LocalDateTime.of(2021,04,20,11,30)
         );
-        BasePrueba.assertThrows(() -> citaTestDataBuilder.build(), ExcepcionValorInvalido.class, "La fecha final no debe ser mayor a la fecha inicial");
+        BasePrueba.assertThrows(() -> citaTestDataBuilder.build(), ExcepcionValorInvalido.class, "La fecha final no debe ser menor a la fecha inicial");
     }
 
     @Test
