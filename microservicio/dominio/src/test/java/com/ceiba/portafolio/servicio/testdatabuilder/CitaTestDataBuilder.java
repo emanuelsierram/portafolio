@@ -33,6 +33,10 @@ public class CitaTestDataBuilder {
         this.fechaFinal = fechaFinal;
         return  this;
     }
+    public CitaTestDataBuilder conValorAcordado(Double valorAcordado){
+       this.valorAcordado=valorAcordado;
+        return  this;
+    }
 
     public Cita build() {
         return new Cita(id, descripcion, fechaInicio, fechaFinal, valorAcordado, idtrabajador);

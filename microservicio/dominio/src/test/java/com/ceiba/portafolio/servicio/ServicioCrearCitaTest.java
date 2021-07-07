@@ -14,7 +14,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -29,12 +28,69 @@ public class ServicioCrearCitaTest {
 
     private final static Double VALOR_ACORDADO_CON_DESCUENTO_POR_CREDITO=186.0;
 
-
     @Before
     public void setup() throws Exception{
         repositorioCita = Mockito.mock(RepositorioCita.class);
         repositorioTrabajador = Mockito.mock(RepositorioTrabajador.class);
         servicioCrearCita = new ServicioCrearCita(repositorioCita, repositorioTrabajador);
+    }
+
+    @Test
+    public void validarCitaExistenciaPreviaTest() {
+        Cita cita = new CitaTestDataBuilder().conFechas(
+                LocalDateTime.of(2021,04,20,10,00),
+                 LocalDateTime.of(2021,04,20,13,0)).build();
+
+        ArrayList<DtoCita> listaExistente = new ArrayList<DtoCita>(){{ add(new DtoCita(1l,
+                "Esta es una descripcion",
+                LocalDateTime.of(2021,04,20,11,0),
+                LocalDateTime.of(2021,04,20,12, 0 ),
+                200.0,
+                1));}};
+        ArrayList<DtoCita> listaExistente2 = new ArrayList<DtoCita>(){{ add(new DtoCita(1l,
+                "Esta es una descripcion",
+                LocalDateTime.of(2021,04,20,9,0),
+                LocalDateTime.of(2021,04,20,12, 0 ),
+                200.0,
+                1));}};
+        ArrayList<DtoCita> listaExistente3 = new ArrayList<DtoCita>(){{ add(new DtoCita(1l,
+                "Esta es una descripcion",
+                LocalDateTime.of(2021,04,20,11,0),
+                LocalDateTime.of(2021,04,20,15, 0 ),
+                200.0,
+                1));}};
+        ArrayList<DtoCita> listaExistente4 = new ArrayList<DtoCita>(){{ add(new DtoCita(1l,
+                "Esta es una descripcion",
+                LocalDateTime.of(2021,04,20,9,0),
+                LocalDateTime.of(2021,04,20,15, 0 ),
+                200.0,
+                1));}};
+
+        Mockito.when(repositorioCita.listarPorIdTrabajador(cita.getIdTrabajador())).thenReturn(listaExistente);
+        BasePrueba.assertThrows(() -> servicioCrearCita.ejecutar(cita), ExcepcionDuplicidad.class,"Ya existe cita en el horario establecido");
+
+        Mockito.when(repositorioCita.listarPorIdTrabajador(cita.getIdTrabajador())).thenReturn(listaExistente2);
+        BasePrueba.assertThrows(() -> servicioCrearCita.ejecutar(cita), ExcepcionDuplicidad.class,"Ya existe cita en el horario establecido");
+
+        BasePrueba.assertThrows(() -> servicioCrearCita.ejecutar(cita), ExcepcionDuplicidad.class,"Ya existe cita en el horario establecido");
+        Mockito.when(repositorioCita.listarPorIdTrabajador(cita.getIdTrabajador())).thenReturn(listaExistente3);
+
+        Mockito.when(repositorioCita.listarPorIdTrabajador(cita.getIdTrabajador())).thenReturn(listaExistente4);
+        BasePrueba.assertThrows(() -> servicioCrearCita.ejecutar(cita), ExcepcionDuplicidad.class,"Ya existe cita en el horario establecido");
+    }
+
+    @Test
+    public void validarValorAcordadoAntesDeLaCitaTest(){
+        Cita cita = new CitaTestDataBuilder().build();
+        final ArgumentCaptor<Cita> citaCaptor = ArgumentCaptor.forClass(Cita.class);
+        Mockito.when(repositorioTrabajador.listarPorId(cita.getIdTrabajador())).thenReturn(new DtoTrabajador(
+                1L,
+                "Ema",
+                "3122078455",
+                "credito"));
+         servicioCrearCita.ejecutar(cita);
+         Mockito.verify(repositorioCita).crear(citaCaptor.capture());
+        assertEquals(VALOR_ACORDADO_CON_DESCUENTO_POR_CREDITO, citaCaptor.getValue().getValorAcordado());
     }
 
     @Test
@@ -55,43 +111,6 @@ public class ServicioCrearCitaTest {
     }
 
     @Test
-    public void validarCitaExistenciaPreviaTest() {
-        // arrange
-        Cita cita = new CitaTestDataBuilder().conFechas(
-                LocalDateTime.of(2021,04,20,10,00),
-                 LocalDateTime.of(2021,04,20,13,0)
-        ).build();
-
-        ArrayList<DtoCita> listaExistente = new ArrayList<DtoCita>(){{ add(new DtoCita(1l,
-                "Esta es una descripcion",
-                LocalDateTime.of(2021,04,20,12,0),
-                LocalDateTime.of(2021,04,20,14, 0 ),
-                200.0,
-                1));}};
-
-        Mockito.when(repositorioCita.listarPorIdTrabajador(cita.getIdTrabajador())).thenReturn(listaExistente);
-        // act - assert
-        BasePrueba.assertThrows(() -> servicioCrearCita.ejecutar(cita), ExcepcionDuplicidad.class,"Ya existe cita en el horario establecido");
-    }
-
-
-
-    @Test
-    public void validarValorAcordadoAntesDeLaCitaTest(){
-        Cita cita = new CitaTestDataBuilder().build();
-        final ArgumentCaptor<Cita> citaCaptor = ArgumentCaptor.forClass(Cita.class);
-        Mockito.when(repositorioTrabajador.listarPorId(cita.getIdTrabajador())).thenReturn(new DtoTrabajador(
-                1L,
-                "Ema",
-                "3122078455",
-                "credito"));
-         ServicioCrearCita servicioCrearCita = new ServicioCrearCita(repositorioCita, repositorioTrabajador);
-         servicioCrearCita.ejecutar(cita);
-         Mockito.verify(repositorioCita).crear(citaCaptor.capture());
-        assertEquals(VALOR_ACORDADO_CON_DESCUENTO_POR_CREDITO, citaCaptor.getValue().getValorAcordado());
-    }
-
-    @Test
     public  void validarDuracionMinimaTest(){
         CitaTestDataBuilder citaTestDataBuilder = new CitaTestDataBuilder().conFechas(
                 LocalDateTime.of(2021,04,20,15,0),
@@ -107,9 +126,24 @@ public class ServicioCrearCitaTest {
                 LocalDateTime.of(2021,04,21,4,0)
         );
         BasePrueba.assertThrows(() -> citaTestDataBuilder.build(), ExcepcionValorInvalido.class, "horario tomado no se encuentra en el horario establecido: 6:00 am - 10:00pm");
+
+        CitaTestDataBuilder citaTestDataBuilder2 = new CitaTestDataBuilder().conFechas(
+                LocalDateTime.of(2021,04,20,12,0),
+                LocalDateTime.of(2021,04,21,4,0)
+        );
+        BasePrueba.assertThrows(() -> citaTestDataBuilder2.build(), ExcepcionValorInvalido.class, "horario tomado no se encuentra en el horario establecido: 6:00 am - 10:00pm");
+
+        CitaTestDataBuilder citaTestDataBuilder3 = new CitaTestDataBuilder().conFechas(
+                LocalDateTime.of(2021,04,20,5,0),
+                LocalDateTime.of(2021,04,21,4,0)
+        );
+        BasePrueba.assertThrows(() -> citaTestDataBuilder3.build(), ExcepcionValorInvalido.class, "horario tomado no se encuentra en el horario establecido: 6:00 am - 10:00pm");
+
+        CitaTestDataBuilder citaTestDataBuilder4 = new CitaTestDataBuilder().conFechas(
+                LocalDateTime.of(2021,04,20,15,0),
+                LocalDateTime.of(2021,04,21,23,0)
+        );
+        BasePrueba.assertThrows(() -> citaTestDataBuilder4.build(), ExcepcionValorInvalido.class, "horario tomado no se encuentra en el horario establecido: 6:00 am - 10:00pm");
+
     }
-
-
-
-
 }

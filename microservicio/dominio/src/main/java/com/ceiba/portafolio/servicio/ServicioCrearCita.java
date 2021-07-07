@@ -38,8 +38,6 @@ public class ServicioCrearCita{
         LocalDateTime fechaInicioIngresada = cita.getFechaInicio();
         LocalDateTime fechaFinalIngresada = cita.getFechaFinal();
 
-
-
         for (DtoCita dtoCita: citasExistentes) {
 
             LocalDateTime fechaInicioExistemte = dtoCita.getFechaInicio();

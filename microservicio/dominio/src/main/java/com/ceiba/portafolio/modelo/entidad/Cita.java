@@ -24,13 +24,10 @@ public class Cita{
     private static final String CITA_MINIMA_DE_UNA_HORA = "Cita minima de una hora";
     private static final String NO_ESTA_EN_EL_INTERVALO_DE_TIEMPO = "horario tomado no se encuentra en el horario establecido: 6:00 am - 10:00pm";
 
-
-
     private static final LocalTime TIEMPO_DE_INICIO_MINIMO= LocalTime.of(6,0,0);
     private static final LocalTime TIEMPO_MAXIMO=LocalTime.of(22,0,0);
     private static final String SATURDAY = "SATURDAY";
     private static final int DURACION_MINIMA_CITA = 59;
-
 
     private Long id;
     private String descripcion;
@@ -58,18 +55,22 @@ public class Cita{
         validarIntervaloDeCita();
     }
 
+    public void valorAcordadoGratis(){
+        if(this.valorAcordado<=0.0){
+            this.valorAcordado=0.0;
+        }
+    }
+
     private  void validarNoAgendarDiaSabado(){
         if(SATURDAY.equals(this.fechaInicio.getDayOfWeek().name())) {
             throw new ExcepcionValorInvalido(NO_SE_PUEDE_AGENDAR_EN_DIA_SABADO);
         }
-
     }
 
     private void validarIngresoDeFechas(){
         if(this.fechaFinal.isBefore(this.fechaInicio)){
             throw new ExcepcionValorInvalido(LA_FECHA_FINAL_NO_DEBE_SER_MENOR);
         }
-
     }
 
     private void validarDuracionMinima() {

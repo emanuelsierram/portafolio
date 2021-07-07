@@ -95,10 +95,6 @@ public class ValidadorArgumento {
         }
     }
 
-    public static void validarDuracionMinima(){
-
-
-    }
 
 
 }

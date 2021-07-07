@@ -18,17 +18,12 @@ public class ServicioActualizarCita {
         this.repositorioCita=repositorioCita;
     }
     public void ejecutar(Cita cita) {
-        if(valorAcordadoDespuesDeTerminarLaCita(cita)<0.0){
-            cita.setValorAcordado(0.0);
-        }
-        else {
-            cita.setValorAcordado(valorAcordadoDespuesDeTerminarLaCita(cita));
-        }
+        cita.setValorAcordado(valorAcordadoDespuesDeTerminarLaCita(cita));
+        cita.valorAcordadoGratis();
         this.repositorioCita.actualizar(cita);
     }
 
     private double valorAcordadoDespuesDeTerminarLaCita(Cita cita){
-
         DtoCita citaExistente = repositorioCita.listarPorId(cita.getId());
         if(cita.getFechaFinal().isAfter(citaExistente.getFechaFinal())){
             int minutos= (int) MINUTES.between(citaExistente.getFechaFinal(), cita.getFechaFinal());
