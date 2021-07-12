@@ -146,4 +146,18 @@ public class ServicioCrearCitaTest {
         BasePrueba.assertThrows(() -> citaTestDataBuilder4.build(), ExcepcionValorInvalido.class, "horario tomado no se encuentra en el horario establecido: 6:00 am - 10:00pm");
 
     }
+
+    @Test
+    public void crearCitaExitosaTest(){
+        Cita cita = new CitaTestDataBuilder().build();
+        final ArgumentCaptor<Cita> citaCaptor = ArgumentCaptor.forClass(Cita.class);
+        Mockito.when(repositorioTrabajador.listarPorId(cita.getIdTrabajador())).thenReturn(new DtoTrabajador(
+                1L,
+                "Ema",
+                "3122078455",
+                "credito"));
+        servicioCrearCita.ejecutar(cita);
+        Mockito.verify(repositorioCita).crear(citaCaptor.capture());
+        assertEquals(citaCaptor.getValue().getId(),cita.getId());
+    }
 }
