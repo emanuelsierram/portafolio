@@ -1,22 +1,9 @@
 package com.ceiba.portafolio.adaptador.api.soap;
-
 import com.ceiba.infraestructura.api.soap.ConsumerSoap;
 import com.ceiba.portafolio.modelo.dto.DtoTcrm;
 import com.ceiba.portafolio.puerto.api.soap.SoapTcrm;
-import jdk.internal.net.http.common.FlowTube;
 import org.springframework.stereotype.Component;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 @Component
 public class SoapTcrmXML implements SoapTcrm {
