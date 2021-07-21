@@ -29,9 +29,8 @@ public class DaoCitaMysql implements DaoCita {
     }
 
     @Override
-    public DtoCita obtenerCita(Integer idTrabajador, Long id) {
+    public DtoCita obtenerCita(Long id) {
         MapSqlParameterSource paramSource = new MapSqlParameterSource();
-        paramSource.addValue("id_trabajador", idTrabajador);
         paramSource.addValue("id", id);
         return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlObtener, paramSource, new MapeoCita());
     }

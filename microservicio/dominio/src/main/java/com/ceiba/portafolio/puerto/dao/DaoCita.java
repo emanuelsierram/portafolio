@@ -6,7 +6,7 @@ public interface DaoCita {
     /**
      * Permite listar citas por trabajador
      * @param id
-     * @return los trabajadores
+     * @return las citas
      */
     List<DtoCita> listarPorId(Integer id);
 
@@ -14,7 +14,7 @@ public interface DaoCita {
      * Permite listar citas por id
      * @return una cita
      */
-    DtoCita obtenerCita(Integer idTrabajador, Long id);
+    DtoCita obtenerCita(Long id);
 
 
 }

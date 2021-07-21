@@ -21,16 +21,16 @@ public class ConsultaControladorCita {
         this.manejadorListarCitas = manejadorListarCitas;
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/trabajadores/{id}")
     @ApiOperation("Listar citas")
     public List<DtoCita> listar(@PathVariable Integer id) {
         return this.manejadorListarCitas.ejecutar(id);
     }
 
-    @GetMapping("/{idTrabajador}/{id}")
+    @GetMapping("/{id}")
     @ApiOperation("Obtener cita")
-    public DtoCita obtener(@PathVariable Integer idTrabajador, @PathVariable Long id) {
-        return this.manejadorListarCitas.ejecutar(idTrabajador,id);
+    public DtoCita obtener(@PathVariable Long id) {
+        return this.manejadorListarCitas.ejecutar(id);
     }
 
 

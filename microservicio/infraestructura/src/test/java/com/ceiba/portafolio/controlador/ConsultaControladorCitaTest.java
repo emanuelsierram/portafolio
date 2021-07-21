@@ -35,7 +35,7 @@ public class ConsultaControladorCitaTest {
         // arrange
 
         // act - assert
-        mocMvc.perform(get("/citas/1")
+        mocMvc.perform(get("/citas/trabajadores/1")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(2)))
@@ -48,7 +48,7 @@ public class ConsultaControladorCitaTest {
 
         // act - assert
         mocMvc.perform( MockMvcRequestBuilders
-                .get("/citas/{id}/{idTrabajador}", 1, 1)
+                .get("/citas/{id}", 1)
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
