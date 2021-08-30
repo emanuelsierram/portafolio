@@ -34,43 +34,44 @@ public class ServicioCrearCita{
 
     private void validarExistenciaPrevia(Cita cita) {
 
-        List<DtoCita> citasExistentes= this.repositorioCita.listarPorIdTrabajador(cita.getIdTrabajador());
+        List<DtoCita> citasExistentes = this.repositorioCita.listarPorIdTrabajador(cita.getIdTrabajador());
         LocalDateTime fechaInicioIngresada = cita.getFechaInicio();
         LocalDateTime fechaFinalIngresada = cita.getFechaFinal();
+
         citasExistentes.stream()
-                .filter(citaExistente -> fechaInicioIngresada.isBefore(citaExistente.getFechaInicio()) &&
-                        fechaFinalIngresada.isAfter(citaExistente.getFechaFinal()) ||
-                        fechaInicioIngresada.isAfter(citaExistente.getFechaInicio()) && fechaInicioIngresada.isBefore(citaExistente.getFechaFinal()) ||
-                        fechaFinalIngresada.isAfter(citaExistente.getFechaInicio()) && fechaFinalIngresada.isBefore(citaExistente.getFechaFinal())
-                        )
-                .forEach(citaExistente->{
+                .filter(citaExistente -> (validarFechasFueraDelRango(fechaInicioIngresada, fechaFinalIngresada, citaExistente)) ||
+                            (validarFechaInicialDentroDelRango(fechaInicioIngresada, citaExistente)) ||
+                            (validarFechaFinalDentroDelRango(fechaFinalIngresada, citaExistente))
+                )
+                .forEach(citaExistente -> {
                     throw new ExcepcionDuplicidad(YA_EXISTE_CITA_EN_EL_HORARIO);
                 });
-
-      /*  for (DtoCita dtoCita: citasExistentes) {
-
-            LocalDateTime fechaInicioExistemte = dtoCita.getFechaInicio();
-            LocalDateTime fechaFinalExistemte = dtoCita.getFechaFinal();
-
-            if(fechaInicioIngresada.isAfter(fechaInicioExistemte) && fechaFinalIngresada.isBefore(fechaFinalExistemte)) {
-                throw new ExcepcionDuplicidad(YA_EXISTE_CITA_EN_EL_HORARIO);
-            }
-            if(fechaInicioIngresada.isBefore(fechaInicioExistemte) && (fechaFinalIngresada.isBefore(fechaFinalExistemte)
-                    && fechaFinalIngresada.isAfter(fechaInicioExistemte))){
-                throw new ExcepcionDuplicidad(YA_EXISTE_CITA_EN_EL_HORARIO);
-            }
-            if((fechaInicioIngresada.isAfter(fechaInicioExistemte) && fechaInicioIngresada.isBefore(fechaFinalExistemte))
-                    && fechaFinalIngresada.isAfter(fechaFinalExistemte)){
-                throw new ExcepcionDuplicidad(YA_EXISTE_CITA_EN_EL_HORARIO);
-            }
-            if(fechaInicioIngresada.isBefore(fechaInicioExistemte) && fechaFinalIngresada.isAfter(fechaFinalExistemte)){
-                throw new ExcepcionDuplicidad(YA_EXISTE_CITA_EN_EL_HORARIO);
-
-            }
-
-        }*/
     }
 
+    private boolean validarFechasFueraDelRango(LocalDateTime fechaInicioIngresada, LocalDateTime fechaFinalIngresada, DtoCita citaExistente){
+        if(fechaInicioIngresada.isBefore(citaExistente.getFechaInicio()) &&
+                fechaFinalIngresada.isAfter(citaExistente.getFechaFinal())){
+            return true;
+        }
+        return false;
+    }
+
+    private boolean validarFechaInicialDentroDelRango(LocalDateTime fechaInicioIngresada, DtoCita citaExistente){
+        if(fechaInicioIngresada.isAfter(citaExistente.getFechaInicio()) &&
+                fechaInicioIngresada.isBefore(citaExistente.getFechaFinal())){
+            return true;
+        }
+        return false;
+    }
+
+    private boolean validarFechaFinalDentroDelRango(LocalDateTime fechaFinalIngresada, DtoCita citaExistente){
+        if(fechaFinalIngresada.isAfter(citaExistente.getFechaInicio()) &&
+                fechaFinalIngresada.isBefore(citaExistente.getFechaFinal())){
+            return true;
+        }
+        return false;
+
+    }
 
     private double valorAcordadoPorMetodoDePago(Cita cita){
         DtoTrabajador trabajador = repositorioTrabajador.listarPorId(cita.getIdTrabajador());

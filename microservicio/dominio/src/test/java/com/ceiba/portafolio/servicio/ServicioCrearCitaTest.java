@@ -93,7 +93,7 @@ public class ServicioCrearCitaTest {
         Mockito.when(repositorioCita.listarPorIdTrabajador(cita.getIdTrabajador())).thenReturn(listaExistente);
         BasePrueba.assertThrows(() -> servicioCrearCita.ejecutar(cita), ExcepcionDuplicidad.class,"Ya existe cita en el horario establecido");
     }
-   
+
 
     @Test
     public void validarValorAcordadoAntesDeLaCitaTest(){
