@@ -37,8 +37,17 @@ public class ServicioCrearCita{
         List<DtoCita> citasExistentes= this.repositorioCita.listarPorIdTrabajador(cita.getIdTrabajador());
         LocalDateTime fechaInicioIngresada = cita.getFechaInicio();
         LocalDateTime fechaFinalIngresada = cita.getFechaFinal();
+        citasExistentes.stream()
+                .filter(citaExistente -> fechaInicioIngresada.isBefore(citaExistente.getFechaInicio()) &&
+                        fechaFinalIngresada.isAfter(citaExistente.getFechaFinal()) ||
+                        fechaInicioIngresada.isAfter(citaExistente.getFechaInicio()) && fechaInicioIngresada.isBefore(citaExistente.getFechaFinal()) ||
+                        fechaFinalIngresada.isAfter(citaExistente.getFechaInicio()) && fechaFinalIngresada.isBefore(citaExistente.getFechaFinal())
+                        )
+                .forEach(citaExistente->{
+                    throw new ExcepcionDuplicidad(YA_EXISTE_CITA_EN_EL_HORARIO);
+                });
 
-        for (DtoCita dtoCita: citasExistentes) {
+      /*  for (DtoCita dtoCita: citasExistentes) {
 
             LocalDateTime fechaInicioExistemte = dtoCita.getFechaInicio();
             LocalDateTime fechaFinalExistemte = dtoCita.getFechaFinal();
@@ -59,7 +68,7 @@ public class ServicioCrearCita{
 
             }
 
-        }
+        }*/
     }
 
 

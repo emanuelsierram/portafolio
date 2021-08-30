@@ -25,6 +25,7 @@ public class ServicioCrearCitaTest {
     private RepositorioCita repositorioCita;
     private RepositorioTrabajador repositorioTrabajador;
     private ServicioCrearCita servicioCrearCita;
+    private Cita cita;
 
     private final static Double VALOR_ACORDADO_CON_DESCUENTO_POR_CREDITO=186.0;
 
@@ -33,13 +34,14 @@ public class ServicioCrearCitaTest {
         repositorioCita = Mockito.mock(RepositorioCita.class);
         repositorioTrabajador = Mockito.mock(RepositorioTrabajador.class);
         servicioCrearCita = new ServicioCrearCita(repositorioCita, repositorioTrabajador);
+
+        cita = new CitaTestDataBuilder().conFechas(
+                LocalDateTime.of(2021,04,20,10,0),
+                LocalDateTime.of(2021,04,20,13,0)).build();
     }
 
     @Test
-    public void validarCitaExistenciaPreviaTest() {
-        Cita cita = new CitaTestDataBuilder().conFechas(
-                LocalDateTime.of(2021,04,20,10,00),
-                 LocalDateTime.of(2021,04,20,13,0)).build();
+    public void validarCitaExistenciaPreviaConFechasAfueraDelRangoTest() {
 
         ArrayList<DtoCita> listaExistente = new ArrayList<DtoCita>(){{ add(new DtoCita(1l,
                 "Esta es una descripcion",
@@ -47,19 +49,41 @@ public class ServicioCrearCitaTest {
                 LocalDateTime.of(2021,04,20,12, 0 ),
                 200.0,
                 1));}};
-        ArrayList<DtoCita> listaExistente2 = new ArrayList<DtoCita>(){{ add(new DtoCita(1l,
+        Mockito.when(repositorioCita.listarPorIdTrabajador(cita.getIdTrabajador())).thenReturn(listaExistente);
+        BasePrueba.assertThrows(() -> servicioCrearCita.ejecutar(cita), ExcepcionDuplicidad.class,"Ya existe cita en el horario establecido");
+    }
+
+    @Test
+    public void validarCitaExistenciaPreviaConFechaInicialDentroDelRangoTest() {
+        ArrayList<DtoCita> listaExistente = new ArrayList<DtoCita>(){{ add(new DtoCita(1l,
                 "Esta es una descripcion",
                 LocalDateTime.of(2021,04,20,9,0),
                 LocalDateTime.of(2021,04,20,12, 0 ),
                 200.0,
                 1));}};
-        ArrayList<DtoCita> listaExistente3 = new ArrayList<DtoCita>(){{ add(new DtoCita(1l,
+
+        Mockito.when(repositorioCita.listarPorIdTrabajador(cita.getIdTrabajador())).thenReturn(listaExistente);
+        BasePrueba.assertThrows(() -> servicioCrearCita.ejecutar(cita), ExcepcionDuplicidad.class,"Ya existe cita en el horario establecido");
+
+    }
+
+    @Test
+    public void validarCitaExistenciaPreviaConFechaFinalDentroDelRangoTest() {
+        ArrayList<DtoCita> listaExistente = new ArrayList<DtoCita>(){{ add(new DtoCita(1l,
                 "Esta es una descripcion",
                 LocalDateTime.of(2021,04,20,11,0),
                 LocalDateTime.of(2021,04,20,15, 0 ),
                 200.0,
                 1));}};
-        ArrayList<DtoCita> listaExistente4 = new ArrayList<DtoCita>(){{ add(new DtoCita(1l,
+
+        Mockito.when(repositorioCita.listarPorIdTrabajador(cita.getIdTrabajador())).thenReturn(listaExistente);
+        BasePrueba.assertThrows(() -> servicioCrearCita.ejecutar(cita), ExcepcionDuplicidad.class,"Ya existe cita en el horario establecido");
+
+    }
+
+    @Test
+    public void validarCitaExistenciaPreviaConFechasDentroDelRango(){
+        ArrayList<DtoCita> listaExistente = new ArrayList<DtoCita>(){{ add(new DtoCita(1l,
                 "Esta es una descripcion",
                 LocalDateTime.of(2021,04,20,9,0),
                 LocalDateTime.of(2021,04,20,15, 0 ),
@@ -68,16 +92,8 @@ public class ServicioCrearCitaTest {
 
         Mockito.when(repositorioCita.listarPorIdTrabajador(cita.getIdTrabajador())).thenReturn(listaExistente);
         BasePrueba.assertThrows(() -> servicioCrearCita.ejecutar(cita), ExcepcionDuplicidad.class,"Ya existe cita en el horario establecido");
-
-        Mockito.when(repositorioCita.listarPorIdTrabajador(cita.getIdTrabajador())).thenReturn(listaExistente2);
-        BasePrueba.assertThrows(() -> servicioCrearCita.ejecutar(cita), ExcepcionDuplicidad.class,"Ya existe cita en el horario establecido");
-
-        BasePrueba.assertThrows(() -> servicioCrearCita.ejecutar(cita), ExcepcionDuplicidad.class,"Ya existe cita en el horario establecido");
-        Mockito.when(repositorioCita.listarPorIdTrabajador(cita.getIdTrabajador())).thenReturn(listaExistente3);
-
-        Mockito.when(repositorioCita.listarPorIdTrabajador(cita.getIdTrabajador())).thenReturn(listaExistente4);
-        BasePrueba.assertThrows(() -> servicioCrearCita.ejecutar(cita), ExcepcionDuplicidad.class,"Ya existe cita en el horario establecido");
     }
+   
 
     @Test
     public void validarValorAcordadoAntesDeLaCitaTest(){
