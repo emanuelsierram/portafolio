@@ -49,27 +49,21 @@ public class ServicioCrearCita{
     }
 
     private boolean validarFechasFueraDelRango(LocalDateTime fechaInicioIngresada, LocalDateTime fechaFinalIngresada, DtoCita citaExistente){
-        if(fechaInicioIngresada.isBefore(citaExistente.getFechaInicio()) &&
-                fechaFinalIngresada.isAfter(citaExistente.getFechaFinal())){
-            return true;
-        }
-        return false;
+
+        return fechaInicioIngresada.isBefore(citaExistente.getFechaInicio()) &&
+                fechaFinalIngresada.isAfter(citaExistente.getFechaFinal());
     }
 
     private boolean validarFechaInicialDentroDelRango(LocalDateTime fechaInicioIngresada, DtoCita citaExistente){
-        if(fechaInicioIngresada.isAfter(citaExistente.getFechaInicio()) &&
-                fechaInicioIngresada.isBefore(citaExistente.getFechaFinal())){
-            return true;
-        }
-        return false;
+
+        return fechaInicioIngresada.isAfter(citaExistente.getFechaInicio()) &&
+                fechaInicioIngresada.isBefore(citaExistente.getFechaFinal());
     }
 
     private boolean validarFechaFinalDentroDelRango(LocalDateTime fechaFinalIngresada, DtoCita citaExistente){
-        if(fechaFinalIngresada.isAfter(citaExistente.getFechaInicio()) &&
-                fechaFinalIngresada.isBefore(citaExistente.getFechaFinal())){
-            return true;
-        }
-        return false;
+
+        return fechaFinalIngresada.isAfter(citaExistente.getFechaInicio()) &&
+                fechaFinalIngresada.isBefore(citaExistente.getFechaFinal());
 
     }
 
