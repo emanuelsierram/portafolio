@@ -33,8 +33,7 @@ public class ConsumerSoap {
             wr.writeBytes(xml);
             wr.flush();
             wr.close();
-            String responseStatus = con.getResponseMessage();
-            System.out.println(responseStatus);
+           // String responseStatus = con.getResponseMessage();
             BufferedReader in = new BufferedReader(new InputStreamReader(
                     con.getInputStream()));
             String inputLine;

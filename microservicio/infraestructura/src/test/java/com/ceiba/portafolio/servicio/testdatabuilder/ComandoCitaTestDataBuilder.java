@@ -23,8 +23,6 @@ public class ComandoCitaTestDataBuilder {
         fechaFinal = LocalDateTime.of(2020,12,20,15,00);
         valorAcordado = 900.0;
         idtrabajador = 1;
-
-        // fecha = LocalDateTime.now();
     }
 
     public ComandoCitaTestDataBuilder conDescripcion(String descripcion) {
