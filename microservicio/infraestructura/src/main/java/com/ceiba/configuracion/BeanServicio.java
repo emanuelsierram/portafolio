@@ -1,6 +1,8 @@
 package com.ceiba.configuracion;
 
 
+import com.ceiba.portafolio.puerto.api.soap.SoapTcrm;
+import com.ceiba.portafolio.puerto.bus_evento.BusEventoTcrm;
 import com.ceiba.portafolio.puerto.repositorio.RepositorioCita;
 import com.ceiba.portafolio.puerto.repositorio.RepositorioTrabajador;
 import com.ceiba.portafolio.servicio.*;
@@ -36,6 +38,12 @@ public class BeanServicio {
     @Bean
     public ServicioEliminarCita servicioEliminarCita (RepositorioCita repositorioCita){
         return  new ServicioEliminarCita(repositorioCita);
+    }
+
+    @Bean
+    public ServicioObtenerTcrm servicioObtenerTcrm (BusEventoTcrm busEventoTcrm, SoapTcrm soapTcrm){
+        return new ServicioObtenerTcrm(busEventoTcrm,soapTcrm);
+
     }
 
 

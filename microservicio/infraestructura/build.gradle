@@ -14,9 +14,9 @@ dependencies {
 
 	testImplementation project.ext.h2
 	testImplementation project.ext.springboottest
+	implementation project.ext.springbootrabbitmq
 	compile project.ext.springbootweb
 	compile project.ext.swagger
-
 	compile project.ext.apachecommons
 	compile project.ext.springbootjdbc
 	runtimeOnly project.ext.db
@@ -29,6 +29,7 @@ dependencies {
 
 	implementation project(':comun:comun-infraestructura')
 	implementation project(':comun:comun-aplicacion')
+
 }
 
 jacocoTestReport {
