@@ -20,7 +20,7 @@ public class SoapTcrmXML implements SoapTcrm {
         int posicionUnit = xml.indexOf("unit");
         String unit = xml.substring(posicionUnit+5,posicionUnit+8);
         int posicionValue = xml.indexOf("value");
-        Float value = Float.parseFloat(xml.substring(posicionValue+6,posicionValue+12));
+        Float value = Float.parseFloat(xml.substring(posicionValue+6,posicionValue+13));
         return new DtoTcrm(unit, value);
     }
 

@@ -43,6 +43,7 @@ public class Cita{
        validarObligatorio(fechaFinal, SE_DEBE_INGRESAR_LA_FECHA_FINAL);
        validarObligatorio(valorAcordado, SE_DEBE_INGRESAR_EL_VALOR_ACORDADO);
 
+
         this.id = id;
         this.descripcion = descripcion;
         this.fechaInicio = fechaInicio;

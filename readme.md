@@ -60,3 +60,10 @@ los valores devuelto .Se esperaria aumentar el tiempo cada vez que un bloque se 
 
 *Cualquier duda o aporte con este bloque contactar a juan.botero@ceiba.com.co o juan.castano@ceiba.com.co*
 Hash de git relacionado: 44a6071f
+
+
+#### RabbitMQ
+Para activar el bus de eventos de RabbitMQ se debe tener Docker Desktop o cualquier herramienta que permita montar y correr la siguiente imagen:
+```console
+docker run -d --resart always --name rabbitmq -p 5672:5672 -p 15672 rabbitmq:3.9-management
+```
